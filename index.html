@@ -58,7 +58,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"e65Vq77rqmkDQc43KkFYR8ZF-gzGzoHsz","app_key":"1cs4DEmISk68uBVHcT5hi89N","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -68,6 +68,35 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
 
 
   
@@ -251,7 +280,499 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/07/13/output/dl_titanic/index/" target="_self">
+          Titanic数据集预测
+        </a>
+      </h2>
 
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/13/output/dl_titanic/index/" target="_self">
+        <div>
+          [toc] 学习自@双木的木。 问题描述在kaggle官网上有Titanic有关的数据集，有以下features，现要求对Suvrived特征进行预测。  数据集分析数据集被划分为训练集和测试集：  training set (train.csv) test set (test.csv)  训练集应该被用来建立你的深度学习模型。对于训练集，我们为每个乘客提供结果(也称为“ground truth”
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-13 08:00" pubdate>
+              2023-07-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/deep-learning/" class="category-chain-item">deep-learning</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/07/05/output/noodles-with-oyster-sauce/index/" target="_self">
+          蚝油拌面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/05/output/noodles-with-oyster-sauce/index/" target="_self">
+        <div>
+          [toc] step 1准备葱、辣椒、大蒜 切碎备用 step 2煮好面过冷水 step 3锅热倒油烧热 step 4加入切碎的蒜、辣椒、葱花 加入白芝麻、花生碎、蚝油，然后浇热油 一勺白糖，两勺生抽，一勺醋，搅拌均匀
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-05 08:00" pubdate>
+              2023-07-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BE%8E%E9%A3%9F%E6%95%99%E7%A8%8B/" class="category-chain-item">美食教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/04/23/output/rdtsc/index/" target="_self">
+          利用时钟周期评测性能
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/23/output/rdtsc/index/" target="_self">
+        <div>
+          [toc] rdtsc指令rdtsc指令, 该指令返回CPU自启动以来的时钟周期数；该时钟周期数，即处理器的时间戳。 在CPU通电启动后，首先会重置EDX和EAX，在每个时钟周期上升或下降沿到来时，会自动累计周期数，并被记录到EDX和EAX寄存器中，EDX是高位，EAX是低位。 rdtsc指令就是从该寄存器中进行获取的。 周期和频率的关系公式：T（周期）&#x3D;1&#x2F;f（频率） 如CP
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-23 08:00" pubdate>
+              2023-04-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/hpc/" class="category-chain-item">hpc</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/04/13/output/python-all-replace/index/" target="_self">
+          python 全局替换
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/13/output/python-all-replace/index/" target="_self">
+        <div>
+          [toc] code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687# -*- coding: utf-8 -*-#
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-13 08:00" pubdate>
+              2023-04-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%BB%91%E7%A7%91%E6%8A%80/" class="category-chain-item">黑科技</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/04/03/output/kdtree/index/" target="_self">
+          基础算法算子库 - KD-Tree
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/03/output/kdtree/index/" target="_self">
+        <div>
+          [toc] libnabo简介libnabo 是一个用于低维空间的快速 K 最近邻库。得益于 C++ 模板，它提供了一个干净、无遗留问题、与标量类型无关的 API。它当前的 CPU 实现受到ANN的强烈启发，但具有更紧凑的数据类型。平均而言，libnabo 比ANN快 5% 到 20% 。 libnabo 依赖于Eigen，一个现代 C++ 矩阵和线性代数库。libnabo 适用于 Eigen 的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-03 08:00" pubdate>
+              2023-04-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E7%AE%97%E5%AD%90%E5%BA%93/" class="category-chain-item">基础算法算子库</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/02/27/output/cmake__file__/index/" target="_self">
+          解决__FILE__ 宏绝对路径的问题(相对路径)
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/27/output/cmake__file__/index/" target="_self">
+        <div>
+          [toc] 问题表现通过cmake编译的代码，在代码中输出FILE就代码文件的绝对路径。在大多数使用FILE这宏的，一般都是用于日志输出，首先使用绝对路径会使日志量膨胀，其次我们最终的程序执行的环境，可能与编译的环境不一样，输出绝对路径并没有多大的参考意义 例如：&#x2F;home&#x2F;dell&#x2F;workspace&#x2F;…. 解决方法既然FILE宏是gcc定义的，默认等于g
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-02-27 08:00" pubdate>
+              2023-02-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/c/" class="category-chain-item">c</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/01/27/output/epoll/index/" target="_self">
+          IO多路复用-epoll
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/01/27/output/epoll/index/" target="_self">
+        <div>
+          [toc] 叙述概念epoll（eventpoll）是一种I&#x2F;O事件通知机制，是linux内核实现IO多路复用的实现。 IO多路复用指在一个操作里同时监听多个输入输出源，在其中一个或多个输入输出源可用时返回，然后对其进行读写操作。 epoll时select和poll的升级版，改进了工作方式会更加高效。 通知机制通知机制就是当事件发生时会主动通知，反面就是轮询机制。 通俗解释epoll的通
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-01-27 08:00" pubdate>
+              2023-01-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/01/18/output/gitbook-introduction/index/" target="_self">
+          Gitbook 入门
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/01/18/output/gitbook-introduction/index/" target="_self">
+        <div>
+          [toc] 前置要求nodejs高版本可能不兼容，需要版本在v10左右。 https://nodejs.org/download/release/v10.21.0/ 更换镜像12npm config get registrynpm config set registry https://registry.npm.taobao.org  安装1npm uninstall -g gitbook-cli
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-01-18 08:00" pubdate>
+              2023-01-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/01/14/output/codestudio-weekend-contest-56-ninja-and-the-challenge/index/" target="_self">
+          Codestudio Weekend Contest 56 - Ninja And The Challenge
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/01/14/output/codestudio-weekend-contest-56-ninja-and-the-challenge/index/" target="_self">
+        <div>
+          [toc] Problem给一个序列，一次操作可以使得任意元素+1&#x2F;-1，问最少多少次操作可以使得整个序列递增或递减？ Solution能否只构造成递增来解决？  当然可以，如果想要构造成递减，只需要把序列逆序，然后构造成递增。  假设我们只有 2 个数字 [10, 6]，那么我们可以将 6 向上移动 4 步或 10 向下移动 4 步；无论哪种方式，成本都是 4。同时，以同样的成本，我们
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-01-14 08:00" pubdate>
+              2023-01-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/acm/" class="category-chain-item">acm</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
 
 
 
@@ -303,6 +824,31 @@
     </div>
   
   
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
   
   
 </div>
@@ -353,6 +899,8 @@
 
 
 
+
+  <script defer src="/js/leancloud.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

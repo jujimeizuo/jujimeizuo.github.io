@@ -1,0 +1,763 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="6.1 DCT变换 DCT变换避免了复述运算。由于图像矩阵是实数矩阵，那么它的DCT也是实数。 DCT是正交变换，其变换矩阵是正交阵，变换核是可分离的。 DCT与IDCT具有相同的变换核，因此具有相同的变换矩阵，即正变换与逆变换公用同一个算法模块。 DCT具有更强的信息集中能力，能将最多的信息放到最少的系数上。  6.1.1 一维DCT变换      6.1.2 二维DCT变换  6.2 图像编码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字图像处理期末复习（六）图像压缩编码">
+<meta property="og:url" content="http://example.com/2021/06/20/output/shuzituxiang6/index/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="6.1 DCT变换 DCT变换避免了复述运算。由于图像矩阵是实数矩阵，那么它的DCT也是实数。 DCT是正交变换，其变换矩阵是正交阵，变换核是可分离的。 DCT与IDCT具有相同的变换核，因此具有相同的变换矩阵，即正变换与逆变换公用同一个算法模块。 DCT具有更强的信息集中能力，能将最多的信息放到最少的系数上。  6.1.1 一维DCT变换      6.1.2 二维DCT变换  6.2 图像编码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/FC7284B1-8860-46E4-AA9E-B5AB73ECB065.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/09173FD0-ADDC-47AD-A0C1-55A12999B95C.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/4B5C21E1-BED8-4025-AC63-E59CEC6FF34A.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/32B44907-962B-4F73-B56A-426757C572A3.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-62.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-2.gif">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-61.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-64.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="article:published_time" content="2021-06-20T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-23T08:03:35.125Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/FC7284B1-8860-46E4-AA9E-B5AB73ECB065.png">
+  
+  
+  
+  <title>数字图像处理期末复习（六）图像压缩编码 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"e65Vq77rqmkDQc43KkFYR8ZF-gzGzoHsz","app_key":"1cs4DEmISk68uBVHcT5hi89N","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数字图像处理期末复习（六）图像压缩编码"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-06-20 08:00" pubdate>
+          2021年6月20日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">数字图像处理期末复习（六）图像压缩编码</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="6-1-DCT变换"><a href="#6-1-DCT变换" class="headerlink" title="6.1 DCT变换"></a>6.1 DCT变换</h2><ol>
+<li>DCT变换避免了复述运算。由于图像矩阵是实数矩阵，那么它的DCT也是实数。</li>
+<li>DCT是正交变换，其变换矩阵是正交阵，变换核是可分离的。</li>
+<li>DCT与IDCT具有相同的变换核，因此具有相同的变换矩阵，即正变换与逆变换公用同一个算法模块。</li>
+<li>DCT具有更强的信息集中能力，能将最多的信息放到最少的系数上。</li>
+</ol>
+<h3 id="6-1-1-一维DCT变换"><a href="#6-1-1-一维DCT变换" class="headerlink" title="6.1.1 一维DCT变换"></a>6.1.1 一维DCT变换</h3><p><img src="/images/FC7284B1-8860-46E4-AA9E-B5AB73ECB065.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/09173FD0-ADDC-47AD-A0C1-55A12999B95C.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/4B5C21E1-BED8-4025-AC63-E59CEC6FF34A.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="6-1-2-二维DCT变换"><a href="#6-1-2-二维DCT变换" class="headerlink" title="6.1.2 二维DCT变换"></a>6.1.2 二维DCT变换</h3><p><img src="/images/32B44907-962B-4F73-B56A-426757C572A3.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="6-2-图像编码基础"><a href="#6-2-图像编码基础" class="headerlink" title="6.2 图像编码基础"></a>6.2 图像编码基础</h2><h3 id="6-2-1-图像压缩的基本概念"><a href="#6-2-1-图像压缩的基本概念" class="headerlink" title="6.2.1 图像压缩的基本概念"></a>6.2.1 图像压缩的基本概念</h3><h4 id="定义：-减少表示图像的数据量"><a href="#定义：-减少表示图像的数据量" class="headerlink" title="定义： 减少表示图像的数据量"></a>定义： 减少表示图像的数据量</h4><ol>
+<li>在图像传输的时候，可传输较少的数据量，但不减少图像所表达的信息量</li>
+<li>在图像存储时，可减少所需的存储空间，同时较少存储所需的时间</li>
+</ol>
+<h4 id="图像信息可以压缩的根据"><a href="#图像信息可以压缩的根据" class="headerlink" title="图像信息可以压缩的根据"></a>图像信息可以压缩的根据</h4><ol>
+<li>图像信号存在大量的冗余</li>
+<li>可以利用人的视觉特性</li>
+</ol>
+<p>图像信息的冗余度表现在结构和统计两个方面</p>
+<p>图像信息结构上冗余度表现为：图像具有很强的空间（帧内）相关性和时间（帧间）相关性。</p>
+<p><strong>编码冗余、像素间冗余、心理-视觉冗余、帧间冗余。</strong></p>
+<p>获取图像压缩质量的好坏是通过计算其<strong>压缩比</strong>得到的，公式为：</p>
+<p><img src="/images/image-62.png" srcset="/img/loading.gif" lazyload><img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>图像熵数学公式</strong>为：</p>
+<p><img src="/images/image-2.gif" srcset="/img/loading.gif" lazyload>  <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="6-2-2-图像编码模型"><a href="#6-2-2-图像编码模型" class="headerlink" title="6.2.2 图像编码模型"></a>6.2.2 图像编码模型</h3><p><img src="/images/image-61.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="6-3-霍夫曼码"><a href="#6-3-霍夫曼码" class="headerlink" title="6.3 霍夫曼码"></a>6.3 霍夫曼码</h2><h3 id="6-3-1-概念"><a href="#6-3-1-概念" class="headerlink" title="6.3.1 概念"></a>6.3.1 概念</h3><p>哈夫曼编码是<strong>可变字长编码</strong>(VLC)的一种。该方法<strong>完全依据字符出现概率</strong>来构造异字头的平均长度最短的码字，有时称之为<strong>最佳编码</strong>，一般就叫做Huffman编码（有时也称为霍夫曼编码）。通俗来说就是，<strong>信源符号出现频率越高，使用的码字就越少。</strong></p>
+<h3 id="6-3-2-编码过程"><a href="#6-3-2-编码过程" class="headerlink" title="6.3.2 编码过程"></a>6.3.2 编码过程</h3><ol>
+<li>对符号的概率进行排序，建立信源递减序列；</li>
+<li>对每个约简的信源进行编码，从最小的信源开始，已知到原始信源。</li>
+</ol>
+<h3 id="6-3-3-霍夫曼编码"><a href="#6-3-3-霍夫曼编码" class="headerlink" title="6.3.3 霍夫曼编码"></a>6.3.3 霍夫曼编码</h3><p>霍夫曼码的产生不是压缩过程。为了实现成为霍夫曼码的压缩，对于产生码字的符号，不管它们的灰度级、行程长度，还是其他灰度映射操作的输出，都必须在生成码字一致的情况下被变换或映射。</p>
+<p>霍夫曼树─即<strong>最优二叉树</strong>，带权路径长度最小的二叉树，经常应用于<strong>数据压缩</strong>。 在计算机信息处理中，“霍夫曼编码”是一种<strong>一致性编码法</strong>（又称“熵编码法”），用于数据的<strong>无损耗压缩</strong>。</p>
+<p>霍夫曼编码的原理： 霍夫曼方法的第一步是通过对所考虑符号的概率进行排序，并将具有最小概率的符号合并为一个符号来替代下次信源化简过程中的符号，从而创建一个简化信源系列。如下图所示那样，载最左边一组虚构的信源符号集合及它们的概率根据概率值的减少从上到下排列，为了形成第一次信源简化，底部的两个概率0.06和0.04进行合并，形成一个概率值为0.1的“复合符号”，这个复合符号及其对应的概率被置于第一个信源简化的列中，以便简化后的信源概率仍然按照其值从大到小进行排列，这个过程一直重复持续到信源只有两个符号的简化信源为止。</p>
+<p><img src="/images/image-64.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="6-3-4-霍夫曼译码"><a href="#6-3-4-霍夫曼译码" class="headerlink" title="6.3.4 霍夫曼译码"></a>6.3.4 霍夫曼译码</h3><p>经过霍夫曼编码再译码之后，才获得有用的图像，译码器必须计算用来编码x的霍夫曼码，再反映射已编码的数据来重建x，这是一种逆过程，但是缺少了反量化的步骤（这是不可逆转的一步）。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="category-chain-item">数字图像处理</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数字图像处理期末复习（六）图像压缩编码</div>
+      <div>http://example.com/2021/06/20/output/shuzituxiang6/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年6月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/20/output/shuzituxiang9/index/" title="数字图像处理期末复习（九）形态学图像处理">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数字图像处理期末复习（九）形态学图像处理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/18/output/shuzituxiang7/index/" title="数字图像处理期末复习（七）图像分割">
+                        <span class="hidden-mobile">数字图像处理期末复习（七）图像分割</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

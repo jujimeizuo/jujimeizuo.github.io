@@ -1,0 +1,833 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[toc] 叙述概念epoll（eventpoll）是一种I&#x2F;O事件通知机制，是linux内核实现IO多路复用的实现。 IO多路复用指在一个操作里同时监听多个输入输出源，在其中一个或多个输入输出源可用时返回，然后对其进行读写操作。 epoll时select和poll的升级版，改进了工作方式会更加高效。 通知机制通知机制就是当事件发生时会主动通知，反面就是轮询机制。 通俗解释epoll的通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO多路复用-epoll">
+<meta property="og:url" content="http://example.com/2023/01/27/output/epoll/index/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[toc] 叙述概念epoll（eventpoll）是一种I&#x2F;O事件通知机制，是linux内核实现IO多路复用的实现。 IO多路复用指在一个操作里同时监听多个输入输出源，在其中一个或多个输入输出源可用时返回，然后对其进行读写操作。 epoll时select和poll的升级版，改进了工作方式会更加高效。 通知机制通知机制就是当事件发生时会主动通知，反面就是轮询机制。 通俗解释epoll的通">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20210403181746358.png">
+<meta property="article:published_time" content="2023-01-27T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-23T08:03:36.102Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/image-20210403181746358.png">
+  
+  
+  
+  <title>IO多路复用-epoll - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"e65Vq77rqmkDQc43KkFYR8ZF-gzGzoHsz","app_key":"1cs4DEmISk68uBVHcT5hi89N","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="IO多路复用-epoll"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-01-27 08:00" pubdate>
+          2023年1月27日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">IO多路复用-epoll</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>[toc]</p>
+<h1 id="叙述"><a href="#叙述" class="headerlink" title="叙述"></a>叙述</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>epoll（eventpoll）是一种I&#x2F;O事件通知机制，是linux内核实现IO多路复用的实现。</p>
+<p>IO多路复用指在一个操作里同时监听多个输入输出源，在其中一个或多个输入输出源可用时返回，然后对其进行读写操作。</p>
+<p>epoll时select和poll的升级版，改进了工作方式会更加高效。</p>
+<h2 id="通知机制"><a href="#通知机制" class="headerlink" title="通知机制"></a>通知机制</h2><p>通知机制就是当事件发生时会主动通知，反面就是轮询机制。</p>
+<h2 id="通俗解释"><a href="#通俗解释" class="headerlink" title="通俗解释"></a>通俗解释</h2><p>epoll的通俗解释是一种当文件描述符的内核缓冲区非空的时候，发出可读信号进行通知，当写缓冲区不满的时候，发出可写信号通知的机制</p>
+<h2 id="对比select和poll"><a href="#对比select和poll" class="headerlink" title="对比select和poll"></a>对比select和poll</h2><p>select&#x2F;poll 低效的原因之一是将 “添加 &#x2F; 维护待检测任务” 和 “阻塞进程 &#x2F; 线程” 两个步骤合二为一。每次调用 select 都需要这两步操作，然而大多数应用场景中，需要监视的 socket 个数相对固定，并不需要每次都修改。epoll 将这两个操作分开，先用 epoll_ctl() 维护等待队列，再调用 epoll_wait() 阻塞进程（解耦）。通过下图的对比显而易见，epoll 的效率得到了提升。</p>
+<p><img src="/images/image-20210403181746358.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="核心函数"><a href="#核心函数" class="headerlink" title="核心函数"></a>核心函数</h1><h2 id="epoll-size"><a href="#epoll-size" class="headerlink" title="epoll_size()"></a>epoll_size()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">// 创建epoll实例，通过一棵红黑树管理待检测集合</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">epoll_size</span><span class="hljs-params">(<span class="hljs-type">int</span> size)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>内核会产生一个epoll 实例数据结构并返回一个文件描述符，这个特殊的描述符就是epoll实例的句柄，后面的两个接口都以它为中心（即epfd形参）。</p>
+<ul>
+<li>函数参数<ul>
+<li>size：在 Linux 内核 2.6.8 版本以后，这个参数是被忽略的，只需要指定一个大于 0 的数值就可以了。</li>
+</ul>
+</li>
+<li>函数返回值：<ul>
+<li>失败：返回 - 1</li>
+<li>成功：返回一个有效的文件描述符，通过这个文件描述符就可以访问创建的 epoll 实例了</li>
+</ul>
+</li>
+</ul>
+<h2 id="epoll-ctl"><a href="#epoll-ctl" class="headerlink" title="epoll_ctl()"></a>epoll_ctl()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">// 管理红黑树上的文件描述符（添加、修改、删除）</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">epoll_ctl</span><span class="hljs-params">(<span class="hljs-type">int</span> epfd, <span class="hljs-type">int</span> op, <span class="hljs-type">int</span> fd, <span class="hljs-keyword">struct</span> epoll_event *event)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>将被监听的描述符添加到红黑树或从红黑树中删除或者对监听事件进行修改。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">union</span> <span class="hljs-title class_">epoll_data</span> &#123;<br><span class="hljs-type">void</span> *ptr; <span class="hljs-comment">/* 指向用户自定义数据 */</span><br><span class="hljs-type">int</span> fd; <span class="hljs-comment">/* 注册的文件描述符 */</span><br><span class="hljs-type">uint32_t</span> u32; <span class="hljs-comment">/* 32-bit integer */</span><br><span class="hljs-type">uint64_t</span> u64; <span class="hljs-comment">/* 64-bit integer */</span><br>&#125; <span class="hljs-type">epoll_data_t</span>;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">epoll_event</span> &#123;<br><span class="hljs-type">uint32_t</span> events; <span class="hljs-comment">/* 描述epoll事件 */</span><br><span class="hljs-type">epoll_data_t</span> data; <span class="hljs-comment">/* 见上面的结构体 */</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>函数参数：<ul>
+<li>epfd：epoll_create () 函数的返回值，通过这个参数找到 epoll 实例</li>
+<li>op：这是一个枚举值，控制通过该函数执行什么操作<ul>
+<li>EPOLL_CTL_ADD：往 epoll 模型中添加新的节点</li>
+<li>EPOLL_CTL_MOD：修改 epoll 模型中已经存在的节点</li>
+<li>EPOLL_CTL_DEL：删除 epoll 模型中的指定的节点</li>
+</ul>
+</li>
+<li>fd：文件描述符，即要添加 &#x2F; 修改 &#x2F; 删除的文件描述符</li>
+<li>event：epoll 事件，用来修饰第三个参数对应的文件描述符的，指定检测这个文件描述符的什么事件<ul>
+<li>events：委托 epoll 检测的事件<ul>
+<li>EPOLLIN：读事件，接收数据，检测读缓冲区，如果有数据该文件描述符就绪</li>
+<li>EPOLLOUT：写事件，发送数据，检测写缓冲区，如果可写该文件描述符就绪</li>
+<li>EPOLLERR：异常事件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>data：用户数据变量，这是一个联合体类型，通常情况下使用里边的 fd 成员，用于存储待检测的文件描述符的值，在调用 epoll_wait() 函数的时候这个值会被传出。</li>
+</ul>
+</li>
+<li>函数返回值：<ul>
+<li>失败：返回 -1</li>
+<li>成功：返回 0</li>
+</ul>
+</li>
+</ul>
+<h2 id="epoll-wait"><a href="#epoll-wait" class="headerlink" title="epoll_wait()"></a>epoll_wait()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">// 检测epoll树中是否有就绪的文件描述符</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">epoll_wait</span><span class="hljs-params">(<span class="hljs-type">int</span> epfd, <span class="hljs-keyword">struct</span> epoll_event * events, <span class="hljs-type">int</span> maxevents, <span class="hljs-type">int</span> timeout)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>阻塞等待注册的事件发生，返回事件的数目，并将触发的事件写入events数组中。</p>
+<ul>
+<li>函数参数：<ul>
+<li>epfd：epoll_create () 函数的返回值，通过这个参数找到 epoll 实例</li>
+<li>events：传出参数，这是一个结构体数组的地址，里边存储了已就绪的文件描述符的信息</li>
+<li>maxevents：修饰第二个参数，结构体数组的容量（元素个数）</li>
+<li>timeout：如果检测的 epoll 实例中没有已就绪的文件描述符，该函数阻塞的时长，单位 ms 毫秒<ul>
+<li>0：函数不阻塞，不管 epoll 实例中有没有就绪的文件描述符，函数被调用后都直接返回</li>
+<li>大于 0：如果 epoll 实例中没有已就绪的文件描述符，函数阻塞对应的毫秒数再返回</li>
+<li>-1：函数一直阻塞，直到 epoll 实例中有已就绪的文件描述符之后才解除阻塞</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>函数返回值：<ul>
+<li>成功：<ul>
+<li>等于 0：函数是阻塞被强制解除了，没有检测到满足条件的文件描述符</li>
+<li>大于 0：检测到的已就绪的文件描述符的总个数</li>
+</ul>
+</li>
+<li>失败：返回 - 1</li>
+</ul>
+</li>
+</ul>
+<h1 id="工作模式"><a href="#工作模式" class="headerlink" title="工作模式"></a>工作模式</h1><p>epoll监控多个文件描述符的I&#x2F;O事件。epoll支持边缘触发(edge trigger，ET)或水平触发（level trigger，LT)，通过epoll_wait等待I&#x2F;O事件，如果当前没有可用的事件则阻塞调用线程。</p>
+<p>select和poll只支持LT工作模式，epoll的默认的工作模式是LT模式。</p>
+<h2 id="水平触发-LT"><a href="#水平触发-LT" class="headerlink" title="水平触发(LT)"></a>水平触发(LT)</h2><p>水平模式可以简称为 LT 模式，LT（level triggered）是缺省的工作方式，并且同时支持block和no-block socket。在这种做法中，内核通知使用者哪些文件描述符已经就绪，之后就可以对这些已就绪的文件描述符进行 IO 操作了。如果我们不作任何操作，内核还是会继续通知使用者。</p>
+<ul>
+<li>读事件：如果文件描述符对应的读缓冲区还有数据，读事件就会被触发，epoll_wait () 解除阻塞<ul>
+<li>当读事件被触发，epoll_wait () 解除阻塞，之后就可以接收数据了</li>
+<li>如果接收数据的 buf 很小，不能全部将缓冲区数据读出，那么读事件会继续被触发，直到数据被全部读出，如果接收数据的内存相对较大，读数据的效率也会相对较高（减少了读数据的次数）</li>
+<li>因为读数据是被动的，必须要通过读事件才能知道有数据到达了，因此对于读事件的检测是必须的</li>
+</ul>
+</li>
+<li>写事件：如果文件描述符对应的写缓冲区可写，写事件就会被触发，epoll_wait () 解除阻塞<ul>
+<li>当写事件被触发，epoll_wait () 解除阻塞，之后就可以将数据写入到写缓冲区了</li>
+<li>写事件的触发发生在写数据之前而不是之后，被写入到写缓冲区中的数据是由内核自动发送出去的</li>
+<li>如果写缓冲区没有被写满，写事件会一直被触发</li>
+<li>因为写数据是主动的，并且写缓冲区一般情况下都是可写的（缓冲区不满），因此对于写事件的检测不是必须的</li>
+</ul>
+</li>
+</ul>
+<h2 id="边缘触发-ET"><a href="#边缘触发-ET" class="headerlink" title="边缘触发(ET)"></a>边缘触发(ET)</h2><p>边沿模式可以简称为 ET 模式，ET（edge-triggered）是高速工作方式，只支持no-block socket。在这种模式下，当文件描述符从未就绪变为就绪时，内核会通过epoll通知使用者。然后它会假设使用者知道文件描述符已经就绪，并且不会再为那个文件描述符发送更多的就绪通知（only once）。如果我们对这个文件描述符做 IO 操作，从而导致它再次变成未就绪，当这个未就绪的文件描述符再次变成就绪状态，内核会再次进行通知，并且还是只通知一次。ET模式在很大程度上减少了epoll事件被重复触发的次数，因此效率要比LT模式高。</p>
+<ul>
+<li>读事件：当读缓冲区有新的数据进入，读事件被触发一次，没有新数据不会触发该事件<ul>
+<li>如果有新数据进入到读缓冲区，读事件被触发，epoll_wait () 解除阻塞</li>
+<li>读事件被触发，可以通过调用 read ()&#x2F;recv () 函数将缓冲区数据读出</li>
+<li>如果数据没有被全部读走，并且没有新数据进入，读事件不会再次触发，只通知一次</li>
+<li>如果数据被全部读走或者只读走一部分，此时有新数据进入，读事件被触发，并且只通知一次</li>
+</ul>
+</li>
+<li>写事件：当写缓冲区状态可写，写事件只会触发一次<ul>
+<li>如果写缓冲区被检测到可写，写事件被触发，epoll_wait () 解除阻塞</li>
+<li>写事件被触发，就可以通过调用 write ()&#x2F;send () 函数，将数据写入到写缓冲区中</li>
+<li>写缓冲区从不满到被写满，期间写事件只会被触发一次</li>
+<li>写缓冲区从满到不满，状态变为可写，写事件只会被触发一次</li>
+</ul>
+</li>
+</ul>
+<p>综上所述：epoll 的边沿模式下 epoll_wait () 检测到文件描述符有新事件才会通知，如果不是新的事件就不通知，通知的次数比水平模式少，效率比水平模式要高。</p>
+<p><strong>ET模式的设置：</strong> 边沿模式不是默认的 epoll 模式，需要额外进行设置。epoll 设置边沿模式是非常简单的，epoll 管理的红黑树示例中每个节点都是 struct epoll_event 类型，只需要将 EPOLLET 添加到结构体的 events 成员中即可：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">epoll_event</span> <span class="hljs-title">ev</span>;</span><br>ev.events = EPOLLIN | EPOLLET;<br></code></pre></td></tr></table></figure>
+
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/159135478">https://zhuanlan.zhihu.com/p/159135478</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_41388533/article/details/110134366">https://blog.csdn.net/baidu_41388533&#x2F;article&#x2F;details&#x2F;110134366</a> <a target="_blank" rel="noopener" href="https://subingwen.cn/linux/epoll/#2-%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0">https://subingwen.cn/linux/epoll/#2-%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>IO多路复用-epoll</div>
+      <div>http://example.com/2023/01/27/output/epoll/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年1月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/27/output/cmake__file__/index/" title="解决__FILE__ 宏绝对路径的问题(相对路径)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">解决__FILE__ 宏绝对路径的问题(相对路径)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/18/output/gitbook-introduction/index/" title="Gitbook 入门">
+                        <span class="hidden-mobile">Gitbook 入门</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

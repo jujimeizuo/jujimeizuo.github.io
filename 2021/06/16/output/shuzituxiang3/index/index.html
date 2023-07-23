@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="3.1 灰度直方图3.1.1 定义灰度直方图是反映一幅图像中各灰度级像素出现的频率，反映灰度分布情况。横坐标用于表示像素的灰度级别，纵坐标用于表示该灰度出现的频数。 3.1.2 特征 只能反映灰度分布，丢失像素位置信息 一幅图像对应唯一灰度直方图，反之不一定 一幅图像分成多个区域，多个区域的直方图之和是原图像的直方图  3.13 理解规则 左黑右白，左暗右亮 横轴上各（亮度值）点对应的柱状高度就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字图像处理期末复习（三）数字图像的基本运算">
+<meta property="og:url" content="http://example.com/2021/06/16/output/shuzituxiang3/index/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="3.1 灰度直方图3.1.1 定义灰度直方图是反映一幅图像中各灰度级像素出现的频率，反映灰度分布情况。横坐标用于表示像素的灰度级别，纵坐标用于表示该灰度出现的频数。 3.1.2 特征 只能反映灰度分布，丢失像素位置信息 一幅图像对应唯一灰度直方图，反之不一定 一幅图像分成多个区域，多个区域的直方图之和是原图像的直方图  3.13 理解规则 左黑右白，左暗右亮 横轴上各（亮度值）点对应的柱状高度就是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-6.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-5.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/D108A660-1968-4C99-8E9F-80627540B950.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-7.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-8.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-9.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-11.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-12.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-13.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-15.png">
+<meta property="og:image" content="http://example.com/images/image-14.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-17.png">
+<meta property="og:image" content="http://example.com/images/image-16.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-18.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-19.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/E765E539-EB6C-4640-A729-23EFD031511C.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/ACC89F15-9E5D-49D7-9614-666131C2E8B9.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-21.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-22.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/images/image-23.png">
+<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="article:published_time" content="2021-06-16T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-23T08:03:34.924Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/image-6.png">
+  
+  
+  
+  <title>数字图像处理期末复习（三）数字图像的基本运算 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"e65Vq77rqmkDQc43KkFYR8ZF-gzGzoHsz","app_key":"1cs4DEmISk68uBVHcT5hi89N","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数字图像处理期末复习（三）数字图像的基本运算"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-06-16 08:00" pubdate>
+          2021年6月16日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">数字图像处理期末复习（三）数字图像的基本运算</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="3-1-灰度直方图"><a href="#3-1-灰度直方图" class="headerlink" title="3.1 灰度直方图"></a>3.1 灰度直方图</h2><h3 id="3-1-1-定义"><a href="#3-1-1-定义" class="headerlink" title="3.1.1 定义"></a>3.1.1 定义</h3><p>灰度直方图是反映一幅图像中各灰度级像素出现的频率，反映灰度分布情况。横坐标用于表示像素的灰度级别，纵坐标用于表示该灰度出现的频数。</p>
+<h3 id="3-1-2-特征"><a href="#3-1-2-特征" class="headerlink" title="3.1.2 特征"></a>3.1.2 特征</h3><ol>
+<li><strong>只能反映灰度分布，丢失像素位置信息</strong></li>
+<li><strong>一幅图像对应唯一灰度直方图，反之不一定</strong></li>
+<li><strong>一幅图像分成多个区域，多个区域的直方图之和是原图像的直方图</strong></li>
+</ol>
+<h3 id="3-13-理解规则"><a href="#3-13-理解规则" class="headerlink" title="3.13 理解规则"></a>3.13 理解规则</h3><ol>
+<li><strong>左黑右白，左暗右亮</strong></li>
+<li><strong>横轴上各（亮度值）点对应的柱状高度就是分布在该亮度的像素个数</strong></li>
+<li><strong>当柱状接近分布在整个横轴上，且至少有一个峰值时，图像的对比度较好</strong></li>
+</ol>
+<h3 id="3-1-4-应用"><a href="#3-1-4-应用" class="headerlink" title="3.1.4 应用"></a>3.1.4 应用</h3><ul>
+<li>判断图像量化是否恰当</li>
+<li>确定图像二值化的阈值</li>
+</ul>
+<p><img src="/images/image-6.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>物体部分灰度值比其他部分灰度值大的时候可以统计图像中物体面积</li>
+<li>计算图像信息量（熵）</li>
+</ul>
+<p><img src="/images/image-5.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="3-1-5-彩色图像转换成灰度图像"><a href="#3-1-5-彩色图像转换成灰度图像" class="headerlink" title="3.1.5 彩色图像转换成灰度图像"></a>3.1.5 彩色图像转换成灰度图像</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">im</span> = cv2.imread(<span class="hljs-string">&#x27;lenna.jpg&#x27;</span>)<br><span class="hljs-attr">nim</span> = cv2.cvtColor(im,  cv2.COLOR_BGR2GRAY)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-1-6-计算直方图"><a href="#3-1-6-计算直方图" class="headerlink" title="3.1.6 计算直方图"></a>3.1.6 计算直方图</h3><p>OpenCV计算直方图的函数：calcHist()</p>
+<p>例如：打开图像 lenna.jpg，使用 cv2.calcHist()函数计算灰度图像的直方图，以屏显打印输出的形式显示具有 100-128 灰度值的像素数目；</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import cv2<br>import matplotlib<span class="hljs-selector-class">.pyplot</span> as plt<br>im = cv2<span class="hljs-selector-class">.imread</span>(<span class="hljs-string">&#x27;lenna.jpg&#x27;</span>)<br>nim = cv2<span class="hljs-selector-class">.cvtColor</span>(im,  cv2.COLOR_BGR2GRAY)<br>jpg = cv2<span class="hljs-selector-class">.calcHist</span>(<span class="hljs-selector-attr">[im]</span>, <span class="hljs-selector-attr">[0]</span>, None, <span class="hljs-selector-attr">[29]</span>, <span class="hljs-selector-attr">[100, 128]</span>)<br>plt<span class="hljs-selector-class">.plot</span>(jpg)<br>plt<span class="hljs-selector-class">.show</span>()<br></code></pre></td></tr></table></figure>
+
+<p> </p>
+<h2 id="3-2-归一化直方图"><a href="#3-2-归一化直方图" class="headerlink" title="3.2 归一化直方图"></a>3.2 归一化直方图</h2><p><img src="/images/D108A660-1968-4C99-8E9F-80627540B950.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3-3-图像的基本运算"><a href="#3-3-图像的基本运算" class="headerlink" title="3.3 图像的基本运算"></a>3.3 图像的基本运算</h2><h3 id="3-3-1-点运算"><a href="#3-3-1-点运算" class="headerlink" title="3.3.1 点运算"></a>3.3.1 点运算</h3><p><strong>点运算：</strong>是指对一幅图像中每个像素点的灰度值进行计算</p>
+<p><img src="/images/image-7.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>点运算的效果</strong>：点运算可以改变图像数据所占据的灰度值范围，从而改善图像显示效果</p>
+<p><strong>点运算的分类</strong>：线性点运算，非线性点运算</p>
+<p><strong>线性点运算</strong>：灰度变换函数形式可以采用线性方程描述</p>
+<p><img src="/images/image-8.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>非线性点运算</strong>：非线性点运算的输出灰度级与输入灰度级呈非线性关系，常见的非线性灰度变换为对数变换和次幂变换</p>
+<p><img src="/images/image-9.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>点运算是否会改变图像内像素点之间的空间位置关系？</li>
+</ul>
+<p>不会！点运算是一种像素的逐点运算，它与相邻的像素之间没有运算关系，点运算不会改变图像内像素点之间的空间位置关系。</p>
+<ul>
+<li>对图像灰度的拉伸，非线性拉伸与分段线性拉伸的区别？</li>
+</ul>
+<p>非线性拉伸不是通过在不同灰度值区间选择不同的线性方程来实现对不同灰度值区间的扩展与压缩。而是在整个灰度值范围内采用统一的非线性变换函数。利用函数的数学性质实现对不同灰度值区间的扩展与压缩。</p>
+<h3 id="3-3-2-代数运算"><a href="#3-3-2-代数运算" class="headerlink" title="3.3.2 代数运算"></a>3.3.2 代数运算</h3><p><strong>代数运算：</strong>将<strong>两幅或多幅</strong>图像通过对应像素之间的加、减、乘、除运算得到输出图像。</p>
+<p><img src="/images/image-11.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>加法运算</strong>：通常用于平均值降噪的场合。</p>
+<p><strong>减法运算（差影法）</strong>：检测同一场景两幅图像之间的变化；混合图像的分离；消除背景影响。</p>
+<p><strong>乘法运算</strong>：图像的局部显示；改变图像的灰度级</p>
+<p><strong>除法运算</strong>：可用于改变图像的灰度级</p>
+<h3 id="3-3-3-逻辑运算"><a href="#3-3-3-逻辑运算" class="headerlink" title="3.3.3 逻辑运算"></a>3.3.3 逻辑运算</h3><p><strong>逻辑运算：</strong>将<strong>两幅或多幅</strong>图像通过对应像素之间的逻辑与、或、非运算得到输出图像</p>
+<p>“与”、“或”逻辑运算可以从一幅图像中提取子图像。</p>
+<h3 id="3-3-4-几何运算"><a href="#3-3-4-几何运算" class="headerlink" title="3.3.4 几何运算"></a>3.3.4 几何运算</h3><p>几何运算：改变图像中物体对象（像素）之间的空间关系。几何变换可以分为图像的位置变换（平移、镜像、旋转）、形状变换（放大、缩小）以及图像的复合变换等。</p>
+<h4 id="图像的平移"><a href="#图像的平移" class="headerlink" title="图像的平移"></a>图像的平移</h4><p><img src="/images/image-12.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/image-13.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="图像的镜像：水平镜像和垂直镜像"><a href="#图像的镜像：水平镜像和垂直镜像" class="headerlink" title="图像的镜像：水平镜像和垂直镜像"></a>图像的镜像：水平镜像和垂直镜像</h4><p><img src="/images/image-15.png" srcset="/img/loading.gif" lazyload> <img src="/images/image-14.png" srcset="/img/loading.gif" lazyload><img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/image-17.png" srcset="/img/loading.gif" lazyload> <img src="/images/image-16.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="图像的旋转"><a href="#图像的旋转" class="headerlink" title="图像的旋转"></a>图像的旋转</h4><p>以图像的中心为原点，旋转一定的角度，即将图像上的所有像素都旋转一个相同的角度。</p>
+<p><img src="/images/image-18.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/image-19.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p>注意：</p>
+<ul>
+<li>图像旋转之后，由于数字图像的坐标值必须是整数，因此，可能引起图像部分像素点的局部改变，所以，这时图像的大小也会发生一定的改变。</li>
+<li>为了避免图像信息的丢失，图像旋转之后必须进行平移变换（或者先平移，在旋转）。</li>
+<li>图像旋转之后，会出现许多空洞点，我们需要对这些空洞点必须进行填充处理，进行插值处理</li>
+</ul>
+<h4 id="图像的缩放"><a href="#图像的缩放" class="headerlink" title="图像的缩放"></a>图像的缩放</h4><p><img src="/images/E765E539-EB6C-4640-A729-23EFD031511C.png" srcset="/img/loading.gif" lazyload><img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/images/ACC89F15-9E5D-49D7-9614-666131C2E8B9.png" srcset="/img/loading.gif" lazyload><img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="3-3-5-灰度插值"><a href="#3-3-5-灰度插值" class="headerlink" title="3.3.5 灰度插值"></a>3.3.5 灰度插值</h3><p>在图像放大的正变换中，出现很多空格，因此，需要对放大后所多出来的一些空格填入适当的像素值。一般采用<strong>最近邻插值和线性插值法</strong>。</p>
+<p><strong>最邻近插值</strong>：最近邻法是将<img src="/images/image-21.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload>点最近的整数坐标<img src="/images/image-22.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload>点的灰度值取为<img src="/images/image-23.png" srcset="/img/loading.gif" lazyload><img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload>点的灰度值。</p>
+<p>在该点各相邻像素间灰度变化较小时，这种方法是一种简单快捷的方法，但当该点相邻像素间灰度差很大时，这种灰度估值方法会产生较大的误差。计算简单，容易产生锯齿现象。</p>
+<p><strong>双线性插值法</strong>：是最邻近法的改进版，效果较好，但是具有低通滤波性，使高频分量受损，图像轮廓受损。会引入平滑效应，使图像产生模糊，清晰度下降。可以采用效果更好的三次内插法。</p>
+<p><strong>三次内插法</strong>：可精确地恢复原函数，当然也就可精确得到采样点间任意点的值。此方法计算量很大，但精度高，能保持较好的图像边缘。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="category-chain-item">数字图像处理</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数字图像处理期末复习（三）数字图像的基本运算</div>
+      <div>http://example.com/2021/06/16/output/shuzituxiang3/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年6月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/16/output/shuzituxiang1/index/" title="数字图像处理期末复习（一）概述">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数字图像处理期末复习（一）概述</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/16/output/shuzituxiang2/index/" title="数字图像处理期末复习（二）数字图像处理基础">
+                        <span class="hidden-mobile">数字图像处理期末复习（二）数字图像处理基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
