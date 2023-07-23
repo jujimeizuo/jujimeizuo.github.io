@@ -7,33 +7,33 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="jujimeizuo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[toc] 名词解释 行满秩  矩阵有效的行数，也就是线性无关的行的个数。  列满秩  矩阵有效的列数，也就是线性无关的列的个数。  满秩  一个矩阵行满秩或者列满秩（满足一个即可）就称为满秩矩阵。 这里需要注意的是，并不是只有方阵才能满秩。因为“满秩”说的是一个矩阵中最大的非零 $n$ 阶方阵的阶数 $n$, 很显然，只要一个矩阵行满秩（列满秩），那么这个矩阵内部就不会存在阶数大于其行数（列数）">
+    <meta name="description" content="[toc]  名词解释  行满秩  矩阵有效的行数，也就是线性无关的行的个数。  列满秩  矩阵有效的列数，也就是线性无关的列的个数。  满秩  一个矩阵行满秩或者列满秩（满足一个即可）就称为满秩矩阵。 这里需要注意的是，并不是只有方阵才能满秩。因为“满秩”说的是一个矩阵中最大的非零 nnn 阶方阵的阶数 nnn, 很显然，只要一个矩阵行满秩（列满秩），那么这个矩阵内部就不会存在阶数大于其行数（列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="矩阵的行&#x2F;列满秩">
 <meta property="og:url" content="http://example.com/2022/12/17/output/full-rank/index/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[toc] 名词解释 行满秩  矩阵有效的行数，也就是线性无关的行的个数。  列满秩  矩阵有效的列数，也就是线性无关的列的个数。  满秩  一个矩阵行满秩或者列满秩（满足一个即可）就称为满秩矩阵。 这里需要注意的是，并不是只有方阵才能满秩。因为“满秩”说的是一个矩阵中最大的非零 $n$ 阶方阵的阶数 $n$, 很显然，只要一个矩阵行满秩（列满秩），那么这个矩阵内部就不会存在阶数大于其行数（列数）">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="[toc]  名词解释  行满秩  矩阵有效的行数，也就是线性无关的行的个数。  列满秩  矩阵有效的列数，也就是线性无关的列的个数。  满秩  一个矩阵行满秩或者列满秩（满足一个即可）就称为满秩矩阵。 这里需要注意的是，并不是只有方阵才能满秩。因为“满秩”说的是一个矩阵中最大的非零 nnn 阶方阵的阶数 nnn, 很显然，只要一个矩阵行满秩（列满秩），那么这个矩阵内部就不会存在阶数大于其行数（列">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/image-1671248187897.png">
-<meta property="og:image" content="http://example.com/images/image-1671248202548.png">
+<meta property="og:image" content="http://example.com/2022/12/17/output/full-rank/index/images/image-1671248187897.png">
+<meta property="og:image" content="http://example.com/2022/12/17/output/full-rank/index/images/image-1671248202548.png">
 <meta property="article:published_time" content="2022-12-17T00:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-23T08:03:35.928Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="jujimeizuo">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/image-1671248187897.png">
+<meta name="twitter:image" content="http://example.com/2022/12/17/output/full-rank/index/images/image-1671248187897.png">
   
   
   
-  <title>矩阵的行/列满秩 - Hexo</title>
+  <title>矩阵的行/列满秩 - jujimeizuoの博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -113,7 +113,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -126,7 +130,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>jujimeizuo</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -251,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          534 字
+          561 字
         
       </span>
     
@@ -313,7 +317,8 @@
               <div class="markdown-body">
                 
                 <p>[toc]</p>
-<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ul>
+<h2 id="名词解释"><a class="markdownIt-Anchor" href="#名词解释"></a> 名词解释</h2>
+<ul>
 <li>行满秩</li>
 </ul>
 <p>矩阵有效的行数，也就是线性无关的行的个数。</p>
@@ -325,22 +330,26 @@
 <li>满秩</li>
 </ul>
 <p>一个矩阵行满秩或者列满秩（满足一个即可）就称为满秩矩阵。</p>
-<p>这里需要注意的是，并不是只有方阵才能满秩。因为“满秩”说的是一个矩阵中最大的非零 $n$ 阶方阵的阶数 $n$, 很显然，只要一个矩阵行满秩（列满秩），那么这个矩阵内部就不会存在阶数大于其行数（列数）的方阵了，自然也不会存在阶数大于其行数（列数）的非零方阵。</p>
+<p>这里需要注意的是，并不是只有方阵才能满秩。因为“满秩”说的是一个矩阵中最大的非零 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶方阵的阶数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span>, 很显然，只要一个矩阵行满秩（列满秩），那么这个矩阵内部就不会存在阶数大于其行数（列数）的方阵了，自然也不会存在阶数大于其行数（列数）的非零方阵。</p>
 <ul>
-<li>行秩 $&#x3D;$ 列秩 $&#x3D;$ 秩</li>
+<li>行秩 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span></span></span></span> 列秩 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span></span></span></span> 秩</li>
 </ul>
 <p>无论一个行列式是否是行满秩或列满秩矩阵，都有如下性质：</p>
-<p>行秩 $&#x3D;$ 列秩 $&#x3D;$ 秩。</p>
-<p>对此我们可以这样理解：由于转置并不改变矩阵的秩，因此必然有“行秩 $&#x3D;$ 列秩”。</p>
-<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>若 $A$ 【行】满秩，则：</p>
-<p>$$R(BA)&#x3D;R(B).$$</p>
-<p>若 $A$ 【列】满秩，则：</p>
-<p>$$R(AB)&#x3D;R(B).$$</p>
-<h2 id="性质解释"><a href="#性质解释" class="headerlink" title="性质解释"></a>性质解释</h2><p>下面对上述性质的解释并不是严格的数学推导，而是通过合理的思考方式，在能够自圆其说的情况下，对上述性质做形象化的解释以帮助记忆和使用上述性质。</p>
-<p>当 $A$ 【行】满秩时，对 $R(BA)&#x3D;R(B)$ 的理解为：</p>
-<p><img src="/images/image-1671248187897.png" srcset="/img/loading.gif" lazyload alt="file"></p>
-<p>当 $A$ 【列】满秩时，对 $R(AB)&#x3D;R(B)$ 的理解为：</p>
-<p><img src="/images/image-1671248202548.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<p>行秩 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span></span></span></span> 列秩 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span></span></span></span> 秩。</p>
+<p>对此我们可以这样理解：由于转置并不改变矩阵的秩，因此必然有“行秩 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span></span></span></span> 列秩”。</p>
+<h2 id="性质"><a class="markdownIt-Anchor" href="#性质"></a> 性质</h2>
+<p>若 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span> 【行】满秩，则：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>B</mi><mi>A</mi><mo stretchy="false">)</mo><mo>=</mo><mi>R</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">R(BA)=R(B).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">A</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></p>
+<p>若 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span> 【列】满秩，则：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>A</mi><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mi>R</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">R(AB)=R(B).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></p>
+<h2 id="性质解释"><a class="markdownIt-Anchor" href="#性质解释"></a> 性质解释</h2>
+<p>下面对上述性质的解释并不是严格的数学推导，而是通过合理的思考方式，在能够自圆其说的情况下，对上述性质做形象化的解释以帮助记忆和使用上述性质。</p>
+<p>当 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span> 【行】满秩时，对 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>B</mi><mi>A</mi><mo stretchy="false">)</mo><mo>=</mo><mi>R</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R(BA)=R(B)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">A</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span></span></span></span> 的理解为：</p>
+<p><img src="images/image-1671248187897.png" srcset="/img/loading.gif" lazyload alt="file" /></p>
+<p>当 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span> 【列】满秩时，对 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>A</mi><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mi>R</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R(AB)=R(B)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span></span></span></span> 的理解为：</p>
+<p><img src="images/image-1671248202548.png" srcset="/img/loading.gif" lazyload alt="file" /></p>
 
                 
               </div>
@@ -386,7 +395,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>jujimeizuo</div>
         </div>
       
       
@@ -547,7 +556,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
     </div>
   
   

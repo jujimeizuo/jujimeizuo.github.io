@@ -7,30 +7,30 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="jujimeizuo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="视觉智慧实践课上需要写深度学习-图像检索的大作业。Python是机器&#x2F;深度学习御用开发语言，Golang是新时代后端开发语言。Python很适合算法写模型，而Golang很适合提供API服务，两位同志都红的发紫。（抄袭） 所以算法方面用python写的sift，qt不想写（不喜欢），最近又在学go，所以准备用gin搭建web端，不过go和python之间好像有什么联系，没错，就是go-p">
+    <meta name="description" content="视觉智慧实践课上需要写深度学习-图像检索的大作业。Python是机器&#x2F;深度学习御用开发语言，Golang是新时代后端开发语言。Python很适合算法写模型，而Golang很适合提供API服务，两位同志都红的发紫。（抄袭） 所以算法方面用python写的sift，qt不想写（不喜欢），最近又在学go，所以准备用gin搭建web端，不过go和python之间好像有什么联系，没错，就是go-python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="go-python">
 <meta property="og:url" content="http://example.com/2022/05/17/output/go-python/index/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="视觉智慧实践课上需要写深度学习-图像检索的大作业。Python是机器&#x2F;深度学习御用开发语言，Golang是新时代后端开发语言。Python很适合算法写模型，而Golang很适合提供API服务，两位同志都红的发紫。（抄袭） 所以算法方面用python写的sift，qt不想写（不喜欢），最近又在学go，所以准备用gin搭建web端，不过go和python之间好像有什么联系，没错，就是go-p">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="视觉智慧实践课上需要写深度学习-图像检索的大作业。Python是机器&#x2F;深度学习御用开发语言，Golang是新时代后端开发语言。Python很适合算法写模型，而Golang很适合提供API服务，两位同志都红的发紫。（抄袭） 所以算法方面用python写的sift，qt不想写（不喜欢），最近又在学go，所以准备用gin搭建web端，不过go和python之间好像有什么联系，没错，就是go-python">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-17T00:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-23T08:03:35.652Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="jujimeizuo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>go-python - Hexo</title>
+  <title>go-python - jujimeizuoの博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -110,7 +110,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -123,7 +127,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>jujimeizuo</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -309,17 +313,16 @@
             
               <div class="markdown-body">
                 
-                <p><strong>视觉智慧实践课上需要写深度学习-图像检索的大作业。Python是机器&#x2F;深度学习御用开发语言，Golang是新时代后端开发语言。Python很适合算法写模型，而Golang很适合提供API服务，两位同志都红的发紫。（抄袭）</strong></p>
+                <p><strong>视觉智慧实践课上需要写深度学习-图像检索的大作业。Python是机器/深度学习御用开发语言，Golang是新时代后端开发语言。Python很适合算法写模型，而Golang很适合提供API服务，两位同志都红的发紫。（抄袭）</strong></p>
 <p><strong>所以算法方面用python写的sift，qt不想写（不喜欢），最近又在学go，所以准备用gin搭建web端，不过go和python之间好像有什么联系，没错，就是go-python，所以开始吧。</strong></p>
-<h2 id="go-python"><a href="#go-python" class="headerlink" title="go-python"></a>go-python</h2><ul>
+<h2 id="go-python"><a class="markdownIt-Anchor" href="#go-python"></a> go-python</h2>
+<ul>
 <li><a href="github.com/sbinet/go-python">go-python</a>主要用在python2.x</li>
 <li><a href="github.com/DataDog/go-python3">go-python3</a>主要用来在python3.x</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">go get -u github.com/DataDog/go-python3<br></code></pre></td></tr></table></figure>
-
 <p>我的mac是python3.9版本的，所以在<code>go build</code>的时候报错：</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle"># github.com<span class="hljs-regexp">/DataDog/g</span>o-python3<br>..<span class="hljs-regexp">/../g</span>o<span class="hljs-regexp">/pkg/m</span>od<span class="hljs-regexp">/github.com/</span>!data!dog<span class="hljs-regexp">/go-python3@v0.0.0-20211102160307-40adc605f1fe/</span>dict.go:<span class="hljs-number">141</span>:<span class="hljs-number">13</span>: could not determine kind of name <span class="hljs-keyword">for</span> C.PyDict_ClearFreeList<br></code></pre></td></tr></table></figure>
-
 <p>意思就是python3.9的这个函数PyDict_ClearFreeList被删除了，找不到</p>
 <p>通过查看这个<a target="_blank" rel="noopener" href="https://github.com/DataDog/go-python3/issues/38">issue</a>可以发现：</p>
 <ul>
@@ -331,21 +334,20 @@
 <p>我通过<code>brew install pkg-config</code>，然后<code>export $PKG_CONFIG_PATH=/usr/local/bin/pkg-config</code>，还是不太行。 原来需要用到python3.7里的pkg-config。</p>
 <p>直接执行下面:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo vim ~/.bash_profile<br><span class="hljs-built_in">export</span> <span class="hljs-variable">$PKG_CONFIG_PATH</span>=/Library/Frameworks/Python.framework/Versions/3.7/lib/pkgconfig<br><span class="hljs-built_in">source</span> ~/.bash_profile<br></code></pre></td></tr></table></figure>
-
 <p>最后<code>go build</code>可以顺利完成。</p>
-<h2 id="go调用python的过程"><a href="#go调用python的过程" class="headerlink" title="go调用python的过程"></a>go调用python的过程</h2><ol>
+<h2 id="go调用python的过程"><a class="markdownIt-Anchor" href="#go调用python的过程"></a> go调用python的过程</h2>
+<ol>
 <li>初始化python环境</li>
 <li>引入模块py对象</li>
 <li>使用该模块的变量与函数</li>
 <li>解析结果</li>
 <li>销毁python3运行环境</li>
 </ol>
-<h2 id="调用中必用到到几个函数"><a href="#调用中必用到到几个函数" class="headerlink" title="调用中必用到到几个函数"></a>调用中必用到到几个函数</h2><p><code>init func()</code></p>
+<h2 id="调用中必用到到几个函数"><a class="markdownIt-Anchor" href="#调用中必用到到几个函数"></a> 调用中必用到到几个函数</h2>
+<p><code>init func()</code></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span> &#123;<br>    python3.Py_Initialize()<br>    <span class="hljs-keyword">if</span> !python3.Py_IsInitialized() &#123;<br>        fmt.Printf(<span class="hljs-string">&quot;Error initializing the python interpreter&quot;</span>)<br>        os.Exit(<span class="hljs-number">1</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p><code>ImportModule func(dir, name strng) *python3.PyObject</code></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// ImportModule</span><br><span class="hljs-comment">// @Description: 导入一个包</span><br><span class="hljs-comment">// @param dir</span><br><span class="hljs-comment">// @param name</span><br><span class="hljs-comment">// @return *python3.PyObject</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ImportModule</span><span class="hljs-params">(dir, name <span class="hljs-type">string</span>)</span></span> *python3.PyObject &#123;<br>    sysModule := python3.PyImport_ImportModule(<span class="hljs-string">&quot;sys&quot;</span>)<br>    path := sysModule.GetAttrString(<span class="hljs-string">&quot;path&quot;</span>)<br>    pathStr, _ := pythonRepr(path)<br>    log.Println(<span class="hljs-string">&quot;before add path is &quot;</span> + pathStr)<br>    python3.PyList_Insert(path, <span class="hljs-number">0</span>, python3.PyUnicode_FromString(<span class="hljs-string">&quot;&quot;</span>))<br>    python3.PyList_Insert(path, <span class="hljs-number">0</span>, python3.PyUnicode_FromString(dir))<br>    pathStr, _ = pythonRepr(path)<br>    log.Println(<span class="hljs-string">&quot;after add path is &quot;</span> + pathStr)<br>    <span class="hljs-keyword">return</span> python3.PyImport_ImportModule(name)<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p><code>pythonRepr func(o *python3.PyObject) (string, error)</code></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// pythonRepr</span><br><span class="hljs-comment">// @Description: PyObject转换为string</span><br><span class="hljs-comment">// @param o</span><br><span class="hljs-comment">// @return string</span><br><span class="hljs-comment">// @return error</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">pythonRepr</span><span class="hljs-params">(o *python3.PyObject)</span></span> (<span class="hljs-type">string</span>, <span class="hljs-type">error</span>) &#123;<br>    <span class="hljs-keyword">if</span> o == <span class="hljs-literal">nil</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>, fmt.Errorf(<span class="hljs-string">&quot;object is nil&quot;</span>)<br>    &#125;<br>    s := o.Repr()<br>    <span class="hljs-keyword">if</span> s == <span class="hljs-literal">nil</span> &#123;<br>        python3.PyErr_Clear()<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>, fmt.Errorf(<span class="hljs-string">&quot;failed to call Repr object method&quot;</span>)<br>    &#125;<br>    <span class="hljs-keyword">defer</span> s.DecRef()<br><br>    <span class="hljs-keyword">return</span> python3.PyUnicode_AsUTF8(s), <span class="hljs-literal">nil</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -372,7 +374,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>jujimeizuo</div>
         </div>
       
       
@@ -533,7 +535,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
     </div>
   
   

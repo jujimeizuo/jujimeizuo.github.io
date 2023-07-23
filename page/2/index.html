@@ -7,26 +7,28 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="jujimeizuo">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+    <meta name="description" content="jujimeizuo的个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="jujimeizuoの博客">
 <meta property="og:url" content="http://example.com/page/2/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="jujimeizuo的个人博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="jujimeizuo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hexo</title>
+  <title>jujimeizuoの博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -100,7 +102,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -113,7 +119,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>jujimeizuo</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -209,13 +215,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/banner.jpeg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="An elegant Material-Design theme for Hexo"></span>
+            <span id="subtitle" data-typed-text="许久不见，甚是想念"></span>
           
         </div>
 
@@ -253,60 +259,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/01/11/output/c-template_specialization/index/" target="_self">
-          C++模版 - 偏特化与全特化
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/01/11/output/c-template_specialization/index/" target="_self">
-        <div>
-          [toc] 模版定义模板就是实现代码重用机制的一种工具，它可以实现类型参数化，即把类型定义为参数，从而实现了真正的代码可重用性。 模版可以分为两类，一个是函数模版，另外一个是类模版。  C++的模板机制被证明是图灵完备的，即可以通过模板元编程（template meta programming）的方式在编译期做任何计算。  实例化模板定义本身不参与编译，而是编译器根据模板的用户使用模板时提供的类型
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-01-11 08:00" pubdate>
-              2023-01-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/c/" class="category-chain-item">c</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
         <a href="/2023/01/05/output/codechef-starters-72-div2-no-sequence/index/" target="_self">
           CodeChef Starters 72 div2 - No sequence
         </a>
@@ -315,7 +267,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/01/05/output/codechef-starters-72-div2-no-sequence/index/" target="_self">
         <div>
-          [toc] 题意三个数字N，K，S，构造一个长度为N的序列B，要求如下：  $B_i \in {-1,0,1}$ $\sum_{i&#x3D;1}^N B_i * K^{i-1}&#x3D;S$  输出任意一种序列，如果没有输出-2。 思路通过观察$\sum_{i&#x3D;1}^N B_i * K^{i-1}&#x3D;S $ 可以得到$ S &#x3D; B1 + \sum_{i&#x3D;2
+          [toc]  题意 三个数字N，K，S，构造一个长度为N的序列B，要求如下：  B_iin−1,0,1B\_i \\in {-1,0,1}B_iin−1,0,1 \\sum\_{i=1}^N B\_i \* K^{i-1}=S  输出任意一种序列，如果没有输出-2。  思路 通过观察$\sum_{i=1}^N B_i * K^{i-1}=S $ 可以得到$ S = B1 + \sum_{i=2}^
         </div>
       </a>
 
@@ -369,7 +321,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/12/31/output/linux-gdb-debug/index/" target="_self">
         <div>
-          [toc] 1. 什么是GDB GDB 是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境，GDB 是 Linux 和许多类 Unix 系统中的标准开发环境。 一般来说，GDB 主要帮助你完成下面四个方面的功能： 启动程序，可以按照自定义的要求随心所欲的运行程序 可让被调试的程序在所指定的调置的断点处停住（断点可以是条件表达式） 当程序被停住时，可以检查此时程序中所
+          [toc]  1. 什么是GDB  GDB 是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境，GDB 是 Linux 和许多类 Unix 系统中的标准开发环境。 一般来说，GDB 主要帮助你完成下面四个方面的功能：  启动程序，可以按照自定义的要求随心所欲的运行程序 可让被调试的程序在所指定的调置的断点处停住（断点可以是条件表达式） 当程序被停住时，可以检查此时程
         </div>
       </a>
 
@@ -430,7 +382,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/12/30/output/add-git-ssh-keys/index/" target="_self">
         <div>
-          [toc] 为什么需要添加现在的github，如果想要push等操作，已经不支持密码来控制，改为ssh keys来控制，所以会存在下面这种情况. 123[root@VM-16-10-centos WebServer]# git push origin mastergit@github.com: Permission denied (publickey).fatal: Could not read
+          [toc]  为什么需要添加 现在的github，如果想要push等操作，已经不支持密码来控制，改为ssh keys来控制，所以会存在下面这种情况. 123[root@VM-16-10-centos WebServer]# git push origin mastergit@github.com: Permission denied (publickey).fatal: Could not rea
         </div>
       </a>
 
@@ -484,7 +436,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/12/17/output/full-rank/index/" target="_self">
         <div>
-          [toc] 名词解释 行满秩  矩阵有效的行数，也就是线性无关的行的个数。  列满秩  矩阵有效的列数，也就是线性无关的列的个数。  满秩  一个矩阵行满秩或者列满秩（满足一个即可）就称为满秩矩阵。 这里需要注意的是，并不是只有方阵才能满秩。因为“满秩”说的是一个矩阵中最大的非零 $n$ 阶方阵的阶数 $n$, 很显然，只要一个矩阵行满秩（列满秩），那么这个矩阵内部就不会存在阶数大于其行数（列数）
+          [toc]  名词解释  行满秩  矩阵有效的行数，也就是线性无关的行的个数。  列满秩  矩阵有效的列数，也就是线性无关的列的个数。  满秩  一个矩阵行满秩或者列满秩（满足一个即可）就称为满秩矩阵。 这里需要注意的是，并不是只有方阵才能满秩。因为“满秩”说的是一个矩阵中最大的非零 nnn 阶方阵的阶数 nnn, 很显然，只要一个矩阵行满秩（列满秩），那么这个矩阵内部就不会存在阶数大于其行数（列
         </div>
       </a>
 
@@ -538,7 +490,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/12/06/output/bigintegermultiply/index/" target="_self">
         <div>
-          [toc] 问题描述有两个超过long long类型的大整数X和Y，用较低的复杂度求解X*Y。 六种方法方法一：模拟时间复杂度：$O(n^2)$ 思路模拟乘法的过程，一个数的第i位和另一个数的第j位相乘，一定会累加到结果的第i+j位，结果的数组一个数组元素存2位数，最后对结果整除得到进位，mod得到余数就是i+j位的数字，最后打印出来。 Code12345678910111213141516171
+          [toc]  问题描述 有两个超过long long类型的大整数X和Y，用较低的复杂度求解X*Y。  六种方法  方法一：模拟 时间复杂度：O(n2)O(n^2)O(n2)  思路 模拟乘法的过程，一个数的第i位和另一个数的第j位相乘，一定会累加到结果的第i+j位，结果的数组一个数组元素存2位数，最后对结果整除得到进位，mod得到余数就是i+j位的数字，最后打印出来。  Code 12345678
         </div>
       </a>
 
@@ -592,7 +544,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/12/06/output/expression/index/" target="_self">
         <div>
-          [toc] 问题描述表达式求值要解决的问题一般是输入一个字符串表示的表达式，要求输出它的值。当然也有变种比如表达式中是否包含括号，指数运算，含多少变量，判断多个表达式是否等价，等等。 表达式一般需要先进行语法分析（grammer parsing）再求值，也可以边分析边求值，语法分析的作用是检查输入的字符串是否是一个合法的表达式，一般使用语法分析器（parser）解决。 表达式包含两类字符：运算数和
+          [toc]  问题描述 表达式求值要解决的问题一般是输入一个字符串表示的表达式，要求输出它的值。当然也有变种比如表达式中是否包含括号，指数运算，含多少变量，判断多个表达式是否等价，等等。 表达式一般需要先进行语法分析（grammer parsing）再求值，也可以边分析边求值，语法分析的作用是检查输入的字符串是否是一个合法的表达式，一般使用语法分析器（parser）解决。 表达式包含两类字符：运算
         </div>
       </a>
 
@@ -646,7 +598,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/12/03/output/atcoder-abc280/index/" target="_self">
         <div>
-          [toc] A. Pawn on a Grid统计#个数。 1234567891011121314151617181920212223242526272829/** *    author:  jujimeizuo *    created: 2022-12-03 20:00:15**/#include &quot;bits/stdc++.h&quot;#ifdef LOCAL#include &
+          [toc]  A. Pawn on a Grid 统计#个数。 1234567891011121314151617181920212223242526272829/** *    author:  jujimeizuo *    created: 2022-12-03 20:00:15**/#include &quot;bits/stdc++.h&quot;#ifdef LOCAL#include
         </div>
       </a>
 
@@ -700,7 +652,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/12/03/output/topcoder-srm842/index/" target="_self">
         <div>
-          [toc] A. ToniasTower题意Tonia 有N个单位立方体。她想用它们来建造一座塔。 Tonia 的塔将由一排或多排立方体组成，每一排立在下一排上。（显然，除了站在地上的最下面一排。） 只有一个限制：除底部以外的每一行都必须严格比它所在的行短（即，立方体严格减少）。 Tonia 现在想知道：她可以用所有立方体建造的最高塔是什么？ 找到最大的 X，这样 Tonia 可以使用她的N个立方
+          [toc]  A. ToniasTower  题意 Tonia 有N个单位立方体。她想用它们来建造一座塔。 Tonia 的塔将由一排或多排立方体组成，每一排立在下一排上。（显然，除了站在地上的最下面一排。） 只有一个限制：除底部以外的每一行都必须严格比它所在的行短（即，立方体严格减少）。 Tonia 现在想知道：她可以用所有立方体建造的最高塔是什么？ 找到最大的 X，这样 Tonia 可以使用她的
         </div>
       </a>
 
@@ -754,7 +706,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/11/20/output/callback/index/" target="_self">
         <div>
-          [toc] 回调函数是做为参数传递的一种函数，在早期C样式编程当中，回调函数必须依赖函数指针来实现。 而后的C++语言当中，又引入了 std::function 与 std::bind 来配合进行回调函数实现。 标准库中有大量函数应用到了回调函数，其中 std::sort 就是一个经典例子。 一、 回调函数回调函数的创建步骤大概为： 1，声明一个函数指针类型。 2，拟写使用回调函数的函数，将函数指
+          [toc] 回调函数是做为参数传递的一种函数，在早期C样式编程当中，回调函数必须依赖函数指针来实现。 而后的C++语言当中，又引入了 std::function 与 std::bind 来配合进行回调函数实现。 标准库中有大量函数应用到了回调函数，其中 std::sort 就是一个经典例子。  一、 回调函数 回调函数的创建步骤大概为： 1，声明一个函数指针类型。 2，拟写使用回调函数的函数，将函
         </div>
       </a>
 
@@ -794,11 +746,65 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2022/11/18/output/getfilenumber/index/" target="_self">
+          Linux统计文件夹下的文件数目
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/18/output/getfilenumber/index/" target="_self">
+        <div>
+          Linux下有三个命令：ls、grep、wc。通过这三个命令的组合可以统计目录下文件及文件夹的个数。   统计当前目录下文件的个数（不包括目录）   1$ ls -l | grep &quot;^-&quot; | wc -l   统计当前目录下文件的个数（包括子目录）   1$ ls -lR| grep &quot;^-&quot; | wc -l   查看某目录下文件夹(目录)的个数（包括子目
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-11-18 08:00" pubdate>
+              2022-11-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
@@ -848,7 +854,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
     </div>
   
   

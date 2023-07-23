@@ -7,30 +7,30 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="jujimeizuo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[toc] rdtsc指令rdtsc指令, 该指令返回CPU自启动以来的时钟周期数；该时钟周期数，即处理器的时间戳。 在CPU通电启动后，首先会重置EDX和EAX，在每个时钟周期上升或下降沿到来时，会自动累计周期数，并被记录到EDX和EAX寄存器中，EDX是高位，EAX是低位。 rdtsc指令就是从该寄存器中进行获取的。 周期和频率的关系公式：T（周期）&#x3D;1&#x2F;f（频率） 如CP">
+    <meta name="description" content="[toc]  rdtsc指令 rdtsc指令, 该指令返回CPU自启动以来的时钟周期数；该时钟周期数，即处理器的时间戳。 在CPU通电启动后，首先会重置EDX和EAX，在每个时钟周期上升或下降沿到来时，会自动累计周期数，并被记录到EDX和EAX寄存器中，EDX是高位，EAX是低位。 rdtsc指令就是从该寄存器中进行获取的。 周期和频率的关系公式：T（周期）&#x3D;1&#x2F;f（频率） 如CPU频率f为1GH">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用时钟周期评测性能">
 <meta property="og:url" content="http://example.com/2023/04/23/output/rdtsc/index/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[toc] rdtsc指令rdtsc指令, 该指令返回CPU自启动以来的时钟周期数；该时钟周期数，即处理器的时间戳。 在CPU通电启动后，首先会重置EDX和EAX，在每个时钟周期上升或下降沿到来时，会自动累计周期数，并被记录到EDX和EAX寄存器中，EDX是高位，EAX是低位。 rdtsc指令就是从该寄存器中进行获取的。 周期和频率的关系公式：T（周期）&#x3D;1&#x2F;f（频率） 如CP">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="[toc]  rdtsc指令 rdtsc指令, 该指令返回CPU自启动以来的时钟周期数；该时钟周期数，即处理器的时间戳。 在CPU通电启动后，首先会重置EDX和EAX，在每个时钟周期上升或下降沿到来时，会自动累计周期数，并被记录到EDX和EAX寄存器中，EDX是高位，EAX是低位。 rdtsc指令就是从该寄存器中进行获取的。 周期和频率的关系公式：T（周期）&#x3D;1&#x2F;f（频率） 如CPU频率f为1GH">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-23T00:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-23T08:03:36.203Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="jujimeizuo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>利用时钟周期评测性能 - Hexo</title>
+  <title>利用时钟周期评测性能 - jujimeizuoの博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -110,7 +110,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -123,7 +127,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>jujimeizuo</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -310,21 +314,23 @@
               <div class="markdown-body">
                 
                 <p>[toc]</p>
-<h1 id="rdtsc指令"><a href="#rdtsc指令" class="headerlink" title="rdtsc指令"></a>rdtsc指令</h1><p>rdtsc指令, 该指令返回CPU自启动以来的时钟周期数；该时钟周期数，即处理器的时间戳。</p>
+<h1 id="rdtsc指令"><a class="markdownIt-Anchor" href="#rdtsc指令"></a> rdtsc指令</h1>
+<p>rdtsc指令, 该指令返回CPU自启动以来的时钟周期数；该时钟周期数，即处理器的时间戳。</p>
 <p>在CPU通电启动后，首先会重置EDX和EAX，在每个时钟周期上升或下降沿到来时，会自动累计周期数，并被记录到EDX和EAX寄存器中，EDX是高位，EAX是低位。</p>
 <p>rdtsc指令就是从该寄存器中进行获取的。</p>
-<p>周期和频率的关系公式：T（周期）&#x3D;1&#x2F;f（频率）</p>
-<p>如CPU频率f为1GHz，则其时钟周期T&#x3D;1&#x2F;1GHz秒，意味着每隔T秒，CPU完成一个最基本的动作，并在寄存器中，对周期数加1。</p>
-<p>故，假设当前时钟周期数为m，则可计算出CPU自启动后，累计运行时间X&#x3D;m*T.</p>
-<p>$$CPU累计运行时间&#x3D;时钟周期数&#x2F;CPU频率$$</p>
-<h1 id="固定CPU频率"><a href="#固定CPU频率" class="headerlink" title="固定CPU频率"></a>固定CPU频率</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get update<br>sudo apt-get install cpufrequtils<br><span class="hljs-built_in">cat</span> /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors<br>sudo cpufreq-set -g performance<br><br><span class="hljs-comment"># 不能一次性设置，需要手动一个一个设置</span><br>cpufreq-set -c 0 -f 2.4G<br>cpufreq-set -c 1 -f 2.4G<br>cpufreq-set -c 2 -f 2.4G<br>cpufreq-set -c 3 -f 2.4G<br>cpufreq-set -c 4 -f 2.4G<br>cpufreq-set -c 5 -f 2.4G<br>cpufreq-set -c 6 -f 2.4G<br>cpufreq-set -c 7 -f 2.4G<br>cpufreq-set -c 8 -f 2.4G<br>cpufreq-set -c 9 -f 2.4G<br>cpufreq-set -c 10 -f 2.4G<br>cpufreq-set -c 11 -f 2.4G<br>cpufreq-set -c 12 -f 2.4G<br>cpufreq-set -c 13 -f 2.4G<br>cpufreq-set -c 14 -f 2.4G<br>cpufreq-set -c 15 -f 2.4G<br><br><span class="hljs-built_in">cat</span> /proc/cpuinfo | grep MHz<br></code></pre></td></tr></table></figure>
-
-<h1 id="绑定CPU核"><a href="#绑定CPU核" class="headerlink" title="绑定CPU核"></a>绑定CPU核</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">bind_to_core</span><span class="hljs-params">(<span class="hljs-type">int</span> tid)</span> </span>&#123;<br>    <span class="hljs-comment">// return;</span><br>    <span class="hljs-type">cpu_set_t</span> mask;<br>    <span class="hljs-built_in">CPU_ZERO</span>(&amp;mask);<br>    <span class="hljs-built_in">CPU_SET</span>(tid, &amp;mask);<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sched_setaffinity</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(mask), &amp;mask) != <span class="hljs-number">0</span>) &#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;Failed to set affinity (core: &quot;</span> &lt;&lt; tid &lt;&lt; <span class="hljs-string">&quot;)&quot;</span> &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
+<p>周期和频率的关系公式：T（周期）=1/f（频率）</p>
+<p>如CPU频率f为1GHz，则其时钟周期T=1/1GHz秒，意味着每隔T秒，CPU完成一个最基本的动作，并在寄存器中，对周期数加1。</p>
+<p>故，假设当前时钟周期数为m，则可计算出CPU自启动后，累计运行时间X=m*T.</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>C</mi><mi>P</mi><mi>U</mi><mtext>累计运行时间</mtext><mo>=</mo><mtext>时钟周期数</mtext><mi mathvariant="normal">/</mi><mi>C</mi><mi>P</mi><mi>U</mi><mtext>频率</mtext></mrow><annotation encoding="application/x-tex">CPU累计运行时间=时钟周期数/CPU频率
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord cjk_fallback">累</span><span class="mord cjk_fallback">计</span><span class="mord cjk_fallback">运</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">间</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">钟</span><span class="mord cjk_fallback">周</span><span class="mord cjk_fallback">期</span><span class="mord cjk_fallback">数</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mord cjk_fallback">频</span><span class="mord cjk_fallback">率</span></span></span></span></span></p>
+<h1 id="固定cpu频率"><a class="markdownIt-Anchor" href="#固定cpu频率"></a> 固定CPU频率</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get update<br>sudo apt-get install cpufrequtils<br><span class="hljs-built_in">cat</span> /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors<br>sudo cpufreq-set -g performance<br><br><span class="hljs-comment"># 不能一次性设置，需要手动一个一个设置</span><br>cpufreq-set -c 0 -f 2.4G<br>cpufreq-set -c 1 -f 2.4G<br>cpufreq-set -c 2 -f 2.4G<br>cpufreq-set -c 3 -f 2.4G<br>cpufreq-set -c 4 -f 2.4G<br>cpufreq-set -c 5 -f 2.4G<br>cpufreq-set -c 6 -f 2.4G<br>cpufreq-set -c 7 -f 2.4G<br>cpufreq-set -c 8 -f 2.4G<br>cpufreq-set -c 9 -f 2.4G<br>cpufreq-set -c 10 -f 2.4G<br>cpufreq-set -c 11 -f 2.4G<br>cpufreq-set -c 12 -f 2.4G<br>cpufreq-set -c 13 -f 2.4G<br>cpufreq-set -c 14 -f 2.4G<br>cpufreq-set -c 15 -f 2.4G<br><br><span class="hljs-built_in">cat</span> /proc/cpuinfo | grep MHz<br></code></pre></td></tr></table></figure>
+<h1 id="绑定cpu核"><a class="markdownIt-Anchor" href="#绑定cpu核"></a> 绑定CPU核</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">bind_to_core</span><span class="hljs-params">(<span class="hljs-type">int</span> tid)</span> </span>&#123;<br>    <span class="hljs-comment">// return;</span><br>    <span class="hljs-type">cpu_set_t</span> mask;<br>    <span class="hljs-built_in">CPU_ZERO</span>(&amp;mask);<br>    <span class="hljs-built_in">CPU_SET</span>(tid, &amp;mask);<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sched_setaffinity</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(mask), &amp;mask) != <span class="hljs-number">0</span>) &#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;Failed to set affinity (core: &quot;</span> &lt;&lt; tid &lt;&lt; <span class="hljs-string">&quot;)&quot;</span> &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>绑定第15个CPU核。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-built_in">bind_to_core</span>(<span class="hljs-number">15</span>);<br></code></pre></td></tr></table></figure>
-
-<h1 id="获取时钟周期"><a href="#获取时钟周期" class="headerlink" title="获取时钟周期"></a>获取时钟周期</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-title">rdtsc</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> lo, hi;<br>    __asm__ __volatile__ (<span class="hljs-string">&quot;rdtsc&quot;</span> : <span class="hljs-string">&quot;=a&quot;</span> (lo), <span class="hljs-string">&quot;=d&quot;</span> (hi));<br>    <span class="hljs-keyword">return</span> ((<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span>)hi &lt;&lt; <span class="hljs-number">32</span>) | lo;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="获取时钟周期"><a class="markdownIt-Anchor" href="#获取时钟周期"></a> 获取时钟周期</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-title">rdtsc</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> lo, hi;<br>    __asm__ __volatile__ (<span class="hljs-string">&quot;rdtsc&quot;</span> : <span class="hljs-string">&quot;=a&quot;</span> (lo), <span class="hljs-string">&quot;=d&quot;</span> (hi));<br>    <span class="hljs-keyword">return</span> ((<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span>)hi &lt;&lt; <span class="hljs-number">32</span>) | lo;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -370,7 +376,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>jujimeizuo</div>
         </div>
       
       
@@ -531,7 +537,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
     </div>
   
   

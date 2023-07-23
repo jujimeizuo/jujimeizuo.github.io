@@ -7,30 +7,30 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="jujimeizuo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[toc] 题意三个数字N，K，S，构造一个长度为N的序列B，要求如下：  $B_i \in {-1,0,1}$ $\sum_{i&#x3D;1}^N B_i * K^{i-1}&#x3D;S$  输出任意一种序列，如果没有输出-2。 思路通过观察$\sum_{i&#x3D;1}^N B_i * K^{i-1}&#x3D;S $ 可以得到$ S &#x3D; B1 + \sum_{i&#x3D;2">
+    <meta name="description" content="[toc]  题意 三个数字N，K，S，构造一个长度为N的序列B，要求如下：  B_iin−1,0,1B\_i \\in {-1,0,1}B_iin−1,0,1 \\sum\_{i&#x3D;1}^N B\_i \* K^{i-1}&#x3D;S  输出任意一种序列，如果没有输出-2。  思路 通过观察$\sum_{i&#x3D;1}^N B_i * K^{i-1}&#x3D;S $ 可以得到$ S &#x3D; B1 + \sum_{i&#x3D;2}^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CodeChef Starters 72 div2 - No sequence">
 <meta property="og:url" content="http://example.com/2023/01/05/output/codechef-starters-72-div2-no-sequence/index/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[toc] 题意三个数字N，K，S，构造一个长度为N的序列B，要求如下：  $B_i \in {-1,0,1}$ $\sum_{i&#x3D;1}^N B_i * K^{i-1}&#x3D;S$  输出任意一种序列，如果没有输出-2。 思路通过观察$\sum_{i&#x3D;1}^N B_i * K^{i-1}&#x3D;S $ 可以得到$ S &#x3D; B1 + \sum_{i&#x3D;2">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="[toc]  题意 三个数字N，K，S，构造一个长度为N的序列B，要求如下：  B_iin−1,0,1B\_i \\in {-1,0,1}B_iin−1,0,1 \\sum\_{i&#x3D;1}^N B\_i \* K^{i-1}&#x3D;S  输出任意一种序列，如果没有输出-2。  思路 通过观察$\sum_{i&#x3D;1}^N B_i * K^{i-1}&#x3D;S $ 可以得到$ S &#x3D; B1 + \sum_{i&#x3D;2}^">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-05T00:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-23T08:03:36.001Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="jujimeizuo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CodeChef Starters 72 div2 - No sequence - Hexo</title>
+  <title>CodeChef Starters 72 div2 - No sequence - jujimeizuoの博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -110,7 +110,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -123,7 +127,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>jujimeizuo</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -259,7 +263,7 @@
         
         
         
-          11 分钟
+          12 分钟
         
       </span>
     
@@ -310,21 +314,28 @@
               <div class="markdown-body">
                 
                 <p>[toc]</p>
-<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>三个数字N，K，S，构造一个长度为N的序列B，要求如下：</p>
+<h1 id="题意"><a class="markdownIt-Anchor" href="#题意"></a> 题意</h1>
+<p>三个数字N，K，S，构造一个长度为N的序列B，要求如下：</p>
 <ul>
-<li>$B_i \in {-1,0,1}$</li>
-<li>$\sum_{i&#x3D;1}^N B_i * K^{i-1}&#x3D;S$</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi mathvariant="normal">_</mi><mi>i</mi><mspace linebreak="newline"></mspace><mi>i</mi><mi>n</mi><mrow><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn></mrow></mrow><annotation encoding="application/x-tex">B\_i \\in {-1,0,1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.99333em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">i</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">i</span><span class="mord mathnormal">n</span><span class="mord"><span class="mord">−</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span></span></span></span></span></li>
+<li><span class='katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \* at position 21: …\_{i=1}^N B\_i \̲*̲ K^{i-1}=S'>\\sum\_{i=1}^N B\_i \* K^{i-1}=S</span></li>
 </ul>
 <p>输出任意一种序列，如果没有输出-2。</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>通过观察$\sum_{i&#x3D;1}^N B_i * K^{i-1}&#x3D;S $</p>
-<p>可以得到$ S &#x3D; B1 + \sum_{i&#x3D;2}^N B_i * K^{i-1} $，即</p>
-<p>$$ S\equiv B_1 \quad (mod \ K) $$</p>
+<h1 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h1>
+<p>通过观察$\sum_{i=1}^N B_i * K^{i-1}=S $</p>
+<p>可以得到$ S = B1 + \sum_{i=2}^N B_i * K^{i-1} $，即</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mspace linebreak="newline"></mspace><mi>e</mi><mi>q</mi><mi>u</mi><mi>i</mi><mi>v</mi><mi>B</mi><mi mathvariant="normal">_</mi><mn>1</mn><mspace linebreak="newline"></mspace><mi>q</mi><mi>u</mi><mi>a</mi><mi>d</mi><mo stretchy="false">(</mo><mi>m</mi><mi>o</mi><mi>d</mi><mspace linebreak="newline"></mspace><mi>K</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">S\\equiv B\_1 \\quad (mod \\ K) 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.99333em;vertical-align:-0.31em;"></span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mord mathnormal">u</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord">1</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mord mathnormal">u</span><span class="mord mathnormal">a</span><span class="mord mathnormal">d</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mord mathnormal">o</span><span class="mord mathnormal">d</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mclose">)</span></span></span></span></span></p>
 <p>所以通过S可以确定B1的值，然后通过一些简单的代数可以得到</p>
-<p>$$ \frac{S-B1}{K} &#x3D; B2+\sum_{i&#x3D;3}^N B_i * K^{i-2} $$</p>
+<p class='katex-block katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \* at position 42: …\_{i=3}^N B\_i \̲*̲ K^{i-2} 
+'>\\frac{S-B1}{K} = B2+\\sum\_{i=3}^N B\_i \* K^{i-2} 
+</p>
 <p>即</p>
-<p>$$\frac{S-B_1}{K} \equiv B_2 \quad (mod \ K) $$</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mspace linebreak="newline"></mspace><mi>f</mi><mi>r</mi><mi>a</mi><mi>c</mi><mrow><mi>S</mi><mo>−</mo><mi>B</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><mi>K</mi><mspace linebreak="newline"></mspace><mi>e</mi><mi>q</mi><mi>u</mi><mi>i</mi><mi>v</mi><mi>B</mi><mi mathvariant="normal">_</mi><mn>2</mn><mspace linebreak="newline"></mspace><mi>q</mi><mi>u</mi><mi>a</mi><mi>d</mi><mo stretchy="false">(</mo><mi>m</mi><mi>o</mi><mi>d</mi><mspace linebreak="newline"></mspace><mi>K</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\\frac{S-B\_1}{K} \\equiv B\_2 \\quad (mod \\ K) 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1.00444em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span><span class="mord mathnormal">c</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord">1</span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.99333em;vertical-align:-0.31em;"></span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mord mathnormal">u</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord">2</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mord mathnormal">u</span><span class="mord mathnormal">a</span><span class="mord mathnormal">d</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mord mathnormal">o</span><span class="mord mathnormal">d</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mclose">)</span></span></span></span></span></p>
 <p>所以可以确定B2的值，以此类推可以得到所有B的值，如果中途出现越界情况，直接返-2即可。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> *    author:  jujimeizuo</span><br><span class="hljs-comment"> *    created: 2023-01-04 22:39:48</span><br><span class="hljs-comment">**/</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;bits/stdc++.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> LOCAL</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;algo/debug.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> debug(...) 42</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">int</span> n, K;<br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> S;<br>    std::cin &gt;&gt; n &gt;&gt; K &gt;&gt; S;<br>    <span class="hljs-function">std::vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">B</span><span class="hljs-params">(n)</span></span>;<br>    <span class="hljs-type">bool</span> ok = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-keyword">if</span> (S % K == <span class="hljs-number">0</span>) &#123;<br>            S /= K;<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((S - <span class="hljs-number">1</span>) % K == <span class="hljs-number">0</span>) &#123;<br>            S = (S - <span class="hljs-number">1</span>) / K;<br>            B[i] = <span class="hljs-number">1</span>;<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((S + <span class="hljs-number">1</span>) % K == <span class="hljs-number">0</span>) &#123;<br>            S = (S + <span class="hljs-number">1</span>) / K;<br>            B[i] = <span class="hljs-number">-1</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            ok = <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">break</span> ;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (!ok || S != <span class="hljs-number">0</span>) &#123;<br>        std::cout &lt;&lt; <span class="hljs-number">-2</span> &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            std::cout &lt;&lt; B[i] &lt;&lt; <span class="hljs-string">&quot; \n&quot;</span>[i == n - <span class="hljs-number">1</span>];<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    std::ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>    std::cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>);<br><br>    <span class="hljs-type">int</span> _;<br>    std::cin &gt;&gt; _;<br>    <span class="hljs-keyword">while</span> (_--) &#123;<br>        <span class="hljs-built_in">solve</span>();<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> *    author:  jujimeizuo</span><br><span class="hljs-comment"> *    created: 2023-01-04 22:39:48</span><br><span class="hljs-comment">**/</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;bits/stdc++.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> LOCAL</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;algo/debug.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> debug(...) 42</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">int</span> n, K;<br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> S;<br>    std::cin &gt;&gt; n &gt;&gt; K &gt;&gt; S;<br>    <span class="hljs-function">std::vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">B</span><span class="hljs-params">(n)</span></span>;<br>    <span class="hljs-type">bool</span> ok = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-keyword">if</span> (S % K == <span class="hljs-number">0</span>) &#123;<br>            S /= K;<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((S - <span class="hljs-number">1</span>) % K == <span class="hljs-number">0</span>) &#123;<br>            S = (S - <span class="hljs-number">1</span>) / K;<br>            B[i] = <span class="hljs-number">1</span>;<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((S + <span class="hljs-number">1</span>) % K == <span class="hljs-number">0</span>) &#123;<br>            S = (S + <span class="hljs-number">1</span>) / K;<br>            B[i] = <span class="hljs-number">-1</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            ok = <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">break</span> ;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (!ok || S != <span class="hljs-number">0</span>) &#123;<br>        std::cout &lt;&lt; <span class="hljs-number">-2</span> &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            std::cout &lt;&lt; B[i] &lt;&lt; <span class="hljs-string">&quot; \n&quot;</span>[i == n - <span class="hljs-number">1</span>];<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    std::ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>    std::cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>);<br><br>    <span class="hljs-type">int</span> _;<br>    std::cin &gt;&gt; _;<br>    <span class="hljs-keyword">while</span> (_--) &#123;<br>        <span class="hljs-built_in">solve</span>();<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -370,7 +381,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>jujimeizuo</div>
         </div>
       
       
@@ -531,7 +542,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
     </div>
   
   

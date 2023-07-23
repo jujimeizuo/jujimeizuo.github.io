@@ -7,30 +7,30 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="jujimeizuo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="常用句柄类型及其说明   句柄类型 说明    HWND 标识窗口句柄   HINSTANCE 标识当前实例句柄   HCURSOR 标识光标句柄   HFONT 标识字体句柄   HPEN 标识画笔句柄   HBRUSH 标识画刷句柄   HDC 标识设备环境句柄   HBITMAP 标识位图句柄   HICON 标识图标句柄   HMENU 标识菜单句柄   HFILE 标识文件句柄   窗口">
+    <meta name="description" content="常用句柄类型及其说明    句柄类型 说明     HWND 标识窗口句柄   HINSTANCE 标识当前实例句柄   HCURSOR 标识光标句柄   HFONT 标识字体句柄   HPEN 标识画笔句柄   HBRUSH 标识画刷句柄   HDC 标识设备环境句柄   HBITMAP 标识位图句柄   HICON 标识图标句柄   HMENU 标识菜单句柄   HFILE 标识文件句柄">
 <meta property="og:type" content="article">
 <meta property="og:title" content="桌面应用开发期末复习——VC++">
 <meta property="og:url" content="http://example.com/2021/06/25/output/vc/index/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="常用句柄类型及其说明   句柄类型 说明    HWND 标识窗口句柄   HINSTANCE 标识当前实例句柄   HCURSOR 标识光标句柄   HFONT 标识字体句柄   HPEN 标识画笔句柄   HBRUSH 标识画刷句柄   HDC 标识设备环境句柄   HBITMAP 标识位图句柄   HICON 标识图标句柄   HMENU 标识菜单句柄   HFILE 标识文件句柄   窗口">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="常用句柄类型及其说明    句柄类型 说明     HWND 标识窗口句柄   HINSTANCE 标识当前实例句柄   HCURSOR 标识光标句柄   HFONT 标识字体句柄   HPEN 标识画笔句柄   HBRUSH 标识画刷句柄   HDC 标识设备环境句柄   HBITMAP 标识位图句柄   HICON 标识图标句柄   HMENU 标识菜单句柄   HFILE 标识文件句柄">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-25T00:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-23T08:03:35.304Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="jujimeizuo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>桌面应用开发期末复习——VC++ - Hexo</title>
+  <title>桌面应用开发期末复习——VC++ - jujimeizuoの博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -110,7 +110,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -123,7 +127,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>jujimeizuo</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -309,14 +313,16 @@
             
               <div class="markdown-body">
                 
-                <h3 id="常用句柄类型及其说明"><a href="#常用句柄类型及其说明" class="headerlink" title="常用句柄类型及其说明"></a>常用句柄类型及其说明</h3><table>
+                <h3 id="常用句柄类型及其说明"><a class="markdownIt-Anchor" href="#常用句柄类型及其说明"></a> 常用句柄类型及其说明</h3>
+<table>
 <thead>
 <tr>
 <th>句柄类型</th>
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>HWND</td>
 <td>标识窗口句柄</td>
 </tr>
@@ -360,11 +366,17 @@
 <td>HFILE</td>
 <td>标识文件句柄</td>
 </tr>
-</tbody></table>
-<h3 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h3><p>窗口是Windows应用程序基本的操作单元，是应用程序与用户之间交互的接口环境，也是系统管理应用程序的基本单位。 应用程序的运行过程即窗口内部、窗口与窗口之间、窗口与系统之间进行数据处理与数据交换的过程。</p>
-<h3 id="Windows应用程序常用消息"><a href="#Windows应用程序常用消息" class="headerlink" title="Windows应用程序常用消息"></a>Windows应用程序常用消息</h3><p>WM_KEYDOWN：按下一个非系统键时产生的消息。 WM_CHAR：按下一个非系统键时产生的消息。 WM_CREATE：由CreateWindow函数发出的消息。 WM_CLOSE：关闭窗口时产生此消息。 WM_DESTROY：消除窗口时由DestroyWindow函数发出此消息。 WM_QUIT：推出应用程序时由PostQuitMessage函数发出的消息。 WM_PAINT：当发生用户区移动或显示事件、用户窗口改变大小的事件、程序通过滚动条滚动窗口时，均产生一条次消息。</p>
-<h3 id="Windows中的事件驱动程序设计"><a href="#Windows中的事件驱动程序设计" class="headerlink" title="Windows中的事件驱动程序设计"></a>Windows中的事件驱动程序设计</h3><p>Windows的应用程序是事件驱动的。事件驱动的程序不是由过程的顺序来控制，而是由事件的发生来控制。 事件驱动程序设计是围绕着信息的产生与处理而展开的。 事件驱动程序方法提供了许多便利，对于那些需要大范围用户干预的应用程序来说，更显其优越性。</p>
-<h3 id="p44-3-3-说明其优点"><a href="#p44-3-3-说明其优点" class="headerlink" title="p44 3.3 说明其优点"></a>p44 3.3 说明其优点</h3><h3 id="Windows应用程序的组成"><a href="#Windows应用程序的组成" class="headerlink" title="Windows应用程序的组成"></a>Windows应用程序的组成</h3><table>
+</tbody>
+</table>
+<h3 id="窗口"><a class="markdownIt-Anchor" href="#窗口"></a> 窗口</h3>
+<p>窗口是Windows应用程序基本的操作单元，是应用程序与用户之间交互的接口环境，也是系统管理应用程序的基本单位。 应用程序的运行过程即窗口内部、窗口与窗口之间、窗口与系统之间进行数据处理与数据交换的过程。</p>
+<h3 id="windows应用程序常用消息"><a class="markdownIt-Anchor" href="#windows应用程序常用消息"></a> Windows应用程序常用消息</h3>
+<p>WM_KEYDOWN：按下一个非系统键时产生的消息。 WM_CHAR：按下一个非系统键时产生的消息。 WM_CREATE：由CreateWindow函数发出的消息。 WM_CLOSE：关闭窗口时产生此消息。 WM_DESTROY：消除窗口时由DestroyWindow函数发出此消息。 WM_QUIT：推出应用程序时由PostQuitMessage函数发出的消息。 WM_PAINT：当发生用户区移动或显示事件、用户窗口改变大小的事件、程序通过滚动条滚动窗口时，均产生一条次消息。</p>
+<h3 id="windows中的事件驱动程序设计"><a class="markdownIt-Anchor" href="#windows中的事件驱动程序设计"></a> Windows中的事件驱动程序设计</h3>
+<p>Windows的应用程序是事件驱动的。事件驱动的程序不是由过程的顺序来控制，而是由事件的发生来控制。 事件驱动程序设计是围绕着信息的产生与处理而展开的。 事件驱动程序方法提供了许多便利，对于那些需要大范围用户干预的应用程序来说，更显其优越性。</p>
+<h3 id="p44-33-说明其优点"><a class="markdownIt-Anchor" href="#p44-33-说明其优点"></a> p44 3.3 说明其优点</h3>
+<h3 id="windows应用程序的组成"><a class="markdownIt-Anchor" href="#windows应用程序的组成"></a> Windows应用程序的组成</h3>
+<table>
 <thead>
 <tr>
 <th>扩展名</th>
@@ -372,7 +384,8 @@
 <th>备注</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>c或cpp</td>
 <td>C语言源程序文件</td>
 <td></td>
@@ -397,21 +410,25 @@
 <td>项目文件</td>
 <td>各种源程序文件编译后生成项目文件，经进一步编译成为可执行文件</td>
 </tr>
-</tbody></table>
-<h3 id="源程序组成结构"><a href="#源程序组成结构" class="headerlink" title="源程序组成结构"></a>源程序组成结构</h3><ol>
+</tbody>
+</table>
+<h3 id="源程序组成结构"><a class="markdownIt-Anchor" href="#源程序组成结构"></a> 源程序组成结构</h3>
+<ol>
 <li>WinMain函数（函数说明、初始化(窗口类定义、注册窗口类、创建窗口、显示窗口)、消息循环）</li>
 <li>窗口函数（WndProc）</li>
 <li>数据类型（LONG、DWORD、UINT、BOOL、LOTSTR、LPCTSTR、LPSTR、LPCSTR）</li>
 <li>数据结构（MSG、WNDCLASSEX、POINT、RECT）</li>
 </ol>
-<h3 id="常用显示标识及其说明"><a href="#常用显示标识及其说明" class="headerlink" title="常用显示标识及其说明"></a>常用显示标识及其说明</h3><table>
+<h3 id="常用显示标识及其说明"><a class="markdownIt-Anchor" href="#常用显示标识及其说明"></a> 常用显示标识及其说明</h3>
+<table>
 <thead>
 <tr>
 <th>标识</th>
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>SW_HIDE</td>
 <td>隐藏窗口</td>
 </tr>
@@ -427,13 +444,19 @@
 <td>SW_SHOWNORMAL</td>
 <td>显示并激活窗口</td>
 </tr>
-</tbody></table>
-<h3 id="图像刷新"><a href="#图像刷新" class="headerlink" title="图像刷新"></a>图像刷新</h3><p>图形刷新是绘图过程中必须考虑的问题，图形刷新包括刷新的请求、系统对刷新请求的响应以及具体的刷新方法。</p>
-<h4 id="刷新请求"><a href="#刷新请求" class="headerlink" title="刷新请求"></a>刷新请求</h4><p>Windows应用程序大部分的用户操作都集中在用户区内，在窗口大小调整、窗口移动或其他对象覆盖时，都必须刷新窗口内用户区的内容，以恢复用户区内应有的显示形态。</p>
+</tbody>
+</table>
+<h3 id="图像刷新"><a class="markdownIt-Anchor" href="#图像刷新"></a> 图像刷新</h3>
+<p>图形刷新是绘图过程中必须考虑的问题，图形刷新包括刷新的请求、系统对刷新请求的响应以及具体的刷新方法。</p>
+<h4 id="刷新请求"><a class="markdownIt-Anchor" href="#刷新请求"></a> 刷新请求</h4>
+<p>Windows应用程序大部分的用户操作都集中在用户区内，在窗口大小调整、窗口移动或其他对象覆盖时，都必须刷新窗口内用户区的内容，以恢复用户区内应有的显示形态。</p>
 <p>Windows系统通常发送WM_PAINT消息将刷新请求传递给应用程序。当刷新时，系统在应用程序的消息队列中加入该消息，以通知窗口函数执行刷新处理。</p>
-<h4 id="系统对刷新请求的响应"><a href="#系统对刷新请求的响应" class="headerlink" title="系统对刷新请求的响应"></a>系统对刷新请求的响应</h4><p>窗口移动后的刷新 被覆盖区域的刷新 对象穿越后的刷新</p>
-<h4 id="刷新方法"><a href="#刷新方法" class="headerlink" title="刷新方法"></a>刷新方法</h4><p>内存中保持一个显示输出的副本，当需要重新绘制窗口时，将副本复制到相应的窗口中。适用于刷新位图等复杂图形。 记录曾经发生的事件，在窗口需要刷新时重新调用窗口执行这个事件。 重新绘制图形。常采用于简单图形，将图形绘制处理程序放在WM_PAINT响应模块中。</p>
-<h3 id="BeginPaint与GetDC的区别"><a href="#BeginPaint与GetDC的区别" class="headerlink" title="BeginPaint与GetDC的区别"></a>BeginPaint与GetDC的区别</h3><table>
+<h4 id="系统对刷新请求的响应"><a class="markdownIt-Anchor" href="#系统对刷新请求的响应"></a> 系统对刷新请求的响应</h4>
+<p>窗口移动后的刷新 被覆盖区域的刷新 对象穿越后的刷新</p>
+<h4 id="刷新方法"><a class="markdownIt-Anchor" href="#刷新方法"></a> 刷新方法</h4>
+<p>内存中保持一个显示输出的副本，当需要重新绘制窗口时，将副本复制到相应的窗口中。适用于刷新位图等复杂图形。 记录曾经发生的事件，在窗口需要刷新时重新调用窗口执行这个事件。 重新绘制图形。常采用于简单图形，将图形绘制处理程序放在WM_PAINT响应模块中。</p>
+<h3 id="beginpaint与getdc的区别"><a class="markdownIt-Anchor" href="#beginpaint与getdc的区别"></a> BeginPaint与GetDC的区别</h3>
+<table>
 <thead>
 <tr>
 <th>项目\函数</th>
@@ -441,7 +464,8 @@
 <th>GetDC函数</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>使用环境</td>
 <td>只用于图像刷新时获取设备环境</td>
 <td>使用较广泛</td>
@@ -456,15 +480,17 @@
 <td>由EndPaint函数释放</td>
 <td>由ReleaseDC函数释放</td>
 </tr>
-</tbody></table>
-<h3 id="画笔、画刷"><a href="#画笔、画刷" class="headerlink" title="画笔、画刷"></a>画笔、画刷</h3><ol>
-<li>画笔、画刷的创建 定义：HPEN hP; 获取Windows系统定义的四种画笔：hP&#x3D;(HPEN)GetStockObject(DC_PEN)； 创建新画笔：hP&#x3D;CreatePen();</li>
+</tbody>
+</table>
+<h3 id="画笔-画刷"><a class="markdownIt-Anchor" href="#画笔-画刷"></a> 画笔、画刷</h3>
+<ol>
+<li>画笔、画刷的创建 定义：HPEN hP; 获取Windows系统定义的四种画笔：hP=(HPEN)GetStockObject(DC_PEN)； 创建新画笔：hP=CreatePen();</li>
 </ol>
-<p>定义：HBRUSH hBr; hBr &#x3D; (HBRUSH)GetStockObject(BLACK_BRUSH); CreateSolidBrush();</p>
+<p>定义：HBRUSH hBr; hBr = (HBRUSH)GetStockObject(BLACK_BRUSH); CreateSolidBrush();</p>
 <ol start="2">
-<li>将画笔选入设备环境 hPenOld&#x3D;SelectObject(hdc, hP)； 直到选入营外一种画笔为止，SelectObject函数的返回值中保存上一次使用的画笔句柄hPenOld。</li>
+<li>将画笔选入设备环境 hPenOld=SelectObject(hdc, hP)； 直到选入营外一种画笔为止，SelectObject函数的返回值中保存上一次使用的画笔句柄hPenOld。</li>
 </ol>
-<p>hBrOld&#x3D;SelectObject(hdc,hBr);</p>
+<p>hBrOld=SelectObject(hdc,hBr);</p>
 <ol start="3">
 <li>删除画笔、画刷 DeleteObject(hP)； DeleteObject(hBr);</li>
 </ol>
@@ -475,7 +501,8 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>PS_DASH</td>
 <td>虚线</td>
 </tr>
@@ -503,44 +530,53 @@
 <td>PS_SOLID</td>
 <td>实线</td>
 </tr>
-</tbody></table>
-<h3 id="文本输出过程"><a href="#文本输出过程" class="headerlink" title="文本输出过程"></a>文本输出过程</h3><p>在定义了字体句柄、字体及字体颜色之后，就可以把设置的字体输出到相应的设备上。 翁嗯输出定位方式：绝对定位和相对定位。</p>
-<h4 id="绝对定位"><a href="#绝对定位" class="headerlink" title="绝对定位"></a>绝对定位</h4><p>逻辑坐标缺点：已输出文本对后续的位置有影响，这种影响无法直接从定位坐标中体现出来。而且当窗口位置或输出字体发生变化时，文本不能随着窗口的尺寸和新的字体的变化灵活调整。</p>
-<h4 id="相对定位"><a href="#相对定位" class="headerlink" title="相对定位"></a>相对定位</h4><p>根据已输出内容，通过获取字体信息，然后格式化文本，确定后续文本的输出的位置，调用函数在窗口中输出文本。</p>
+</tbody>
+</table>
+<h3 id="文本输出过程"><a class="markdownIt-Anchor" href="#文本输出过程"></a> 文本输出过程</h3>
+<p>在定义了字体句柄、字体及字体颜色之后，就可以把设置的字体输出到相应的设备上。 翁嗯输出定位方式：绝对定位和相对定位。</p>
+<h4 id="绝对定位"><a class="markdownIt-Anchor" href="#绝对定位"></a> 绝对定位</h4>
+<p>逻辑坐标缺点：已输出文本对后续的位置有影响，这种影响无法直接从定位坐标中体现出来。而且当窗口位置或输出字体发生变化时，文本不能随着窗口的尺寸和新的字体的变化灵活调整。</p>
+<h4 id="相对定位"><a class="markdownIt-Anchor" href="#相对定位"></a> 相对定位</h4>
+<p>根据已输出内容，通过获取字体信息，然后格式化文本，确定后续文本的输出的位置，调用函数在窗口中输出文本。</p>
 <ol>
-<li><p>获取字体信息 GetTextMetrics(hdc, &amp;tm)</p>
+<li>
+<p>获取字体信息 GetTextMetrics(hdc, &amp;tm)</p>
 </li>
-<li><p>格式化文本 确定后续文本坐标，确定换行时文本坐标 Y &#x3D; y0 + tm.tmHeight + tmExternalLeading;</p>
+<li>
+<p>格式化文本 确定后续文本坐标，确定换行时文本坐标 Y = y0 + tm.tmHeight + tmExternalLeading;</p>
 </li>
-<li><p>文本输出 TextOut(hdc, x, y, “”, len);</p>
+<li>
+<p>文本输出 TextOut(hdc, x, y, “”, len);</p>
 </li>
 </ol>
-<h3 id="用户区鼠标消息"><a href="#用户区鼠标消息" class="headerlink" title="用户区鼠标消息"></a>用户区鼠标消息</h3><table>
+<h3 id="用户区鼠标消息"><a class="markdownIt-Anchor" href="#用户区鼠标消息"></a> 用户区鼠标消息</h3>
+<table>
 <thead>
 <tr>
 <th>消息</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>WM_LBUTTONDOWN &#x2F; UP</td>
-<td>用户区单击 &#x2F; 释放鼠标左键</td>
+<tbody>
+<tr>
+<td>WM_LBUTTONDOWN / UP</td>
+<td>用户区单击 / 释放鼠标左键</td>
 </tr>
 <tr>
 <td>WM_LBUTTONDBLCLK</td>
 <td>用户区双击鼠标左键</td>
 </tr>
 <tr>
-<td>WM_MBUTTONDOWN &#x2F; UP</td>
-<td>用户区单击 &#x2F; 释放鼠标中键</td>
+<td>WM_MBUTTONDOWN / UP</td>
+<td>用户区单击 / 释放鼠标中键</td>
 </tr>
 <tr>
 <td>WM_MBUTTONDBLCLK</td>
 <td>用户区双击鼠标中键</td>
 </tr>
 <tr>
-<td>WM_RBUTTONDOWN &#x2F; UP</td>
-<td>用户区单击 &#x2F; 释放鼠标右键</td>
+<td>WM_RBUTTONDOWN / UP</td>
+<td>用户区单击 / 释放鼠标右键</td>
 </tr>
 <tr>
 <td>WM_RBUTTONDBLCLK</td>
@@ -562,15 +598,18 @@
 <td>WM_MOUSEHOVER</td>
 <td>鼠标的光标在窗口的用户区盘旋时发出的消息</td>
 </tr>
-</tbody></table>
-<h3 id="wParam的值"><a href="#wParam的值" class="headerlink" title="wParam的值"></a>wParam的值</h3><table>
+</tbody>
+</table>
+<h3 id="wparam的值"><a class="markdownIt-Anchor" href="#wparam的值"></a> wParam的值</h3>
+<table>
 <thead>
 <tr>
 <th>消息</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>MK_CONTROL</td>
 <td>按下键盘Ctrl键</td>
 </tr>
@@ -598,29 +637,42 @@
 <td>MK_XBUTTON2</td>
 <td>按下Windows第二徽标键</td>
 </tr>
-</tbody></table>
-<h3 id="鼠标应用程序实例"><a href="#鼠标应用程序实例" class="headerlink" title="鼠标应用程序实例"></a>鼠标应用程序实例</h3><p>p &#x3D; (LOWORD(lPARAM), HIWORD(lPARAM)) 当消息是鼠标消息时，获取坐标</p>
-<h3 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h3><p>对话框有模式对话框和非模式对话框。 模式对话框不允许用户在关闭对话框之前切换到应用程序的其他窗口，而非模式对话框然也。</p>
-<h4 id="模式对话框的编程方法"><a href="#模式对话框的编程方法" class="headerlink" title="模式对话框的编程方法"></a>模式对话框的编程方法</h4><ol>
-<li><p>定义对话框资源 STYLE DS_MODALFRAME|WS_POPUP_WS_CAPTION</p>
+</tbody>
+</table>
+<h3 id="鼠标应用程序实例"><a class="markdownIt-Anchor" href="#鼠标应用程序实例"></a> 鼠标应用程序实例</h3>
+<p>p = (LOWORD(lPARAM), HIWORD(lPARAM)) 当消息是鼠标消息时，获取坐标</p>
+<h3 id="对话框"><a class="markdownIt-Anchor" href="#对话框"></a> 对话框</h3>
+<p>对话框有模式对话框和非模式对话框。 模式对话框不允许用户在关闭对话框之前切换到应用程序的其他窗口，而非模式对话框然也。</p>
+<h4 id="模式对话框的编程方法"><a class="markdownIt-Anchor" href="#模式对话框的编程方法"></a> 模式对话框的编程方法</h4>
+<ol>
+<li>
+<p>定义对话框资源 STYLE DS_MODALFRAME|WS_POPUP_WS_CAPTION</p>
 </li>
-<li><p>调用函数DialogBox显示对话框 DialogBox();</p>
+<li>
+<p>调用函数DialogBox显示对话框 DialogBox();</p>
 </li>
-<li><p>构造对话框消息处理函数 DlgProc();</p>
+<li>
+<p>构造对话框消息处理函数 DlgProc();</p>
 </li>
-<li><p>关闭对话框 EndDialog()；</p>
+<li>
+<p>关闭对话框 EndDialog()；</p>
 </li>
 </ol>
-<h4 id="非模式对话框的编程方法"><a href="#非模式对话框的编程方法" class="headerlink" title="非模式对话框的编程方法"></a>非模式对话框的编程方法</h4><p>非模式对话框与模式对话框的变成比较类似，但在对话框的定义、对话框的创建及消息处理上略有差别。</p>
+<h4 id="非模式对话框的编程方法"><a class="markdownIt-Anchor" href="#非模式对话框的编程方法"></a> 非模式对话框的编程方法</h4>
+<p>非模式对话框与模式对话框的变成比较类似，但在对话框的定义、对话框的创建及消息处理上略有差别。</p>
 <ol>
-<li><p>定义对话框样式 STYLE WS_POPUP|WS_CAPTION|WS_VISIBLE</p>
+<li>
+<p>定义对话框样式 STYLE WS_POPUP|WS_CAPTION|WS_VISIBLE</p>
 </li>
-<li><p>创建对话框函数 CreateDialog();</p>
+<li>
+<p>创建对话框函数 CreateDialog();</p>
 </li>
-<li><p>消息循环部分的处理</p>
+<li>
+<p>消息循环部分的处理</p>
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(<span class="hljs-built_in">GetMessage</span>(&amp;Msg, <span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)) &#123;<br><span class="hljs-keyword">if</span>(!<span class="hljs-built_in">IsDialogMessage</span>(hdlg, &amp;Msg)) &#123;<br>    <span class="hljs-built_in">TranslateMessage</span>(&amp;Msg);<br>    <span class="hljs-built_in">DispatchMessage</span>(&amp;Msg);<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 </li>
-<li><p>关闭对话框的函数 DestroyWindow(HWND hdlg);</p>
+<li>
+<p>关闭对话框的函数 DestroyWindow(HWND hdlg);</p>
 </li>
 </ol>
 
@@ -668,7 +720,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>jujimeizuo</div>
         </div>
       
       
@@ -716,8 +768,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/06/20/output/jizu8/index/" title="计算机组成原理期末复习（八）控制单元的功能">
-                        <span class="hidden-mobile">计算机组成原理期末复习（八）控制单元的功能</span>
+                      <a href="/2021/06/20/output/jizu6/index/" title="计算机组成原理期末复习（六）指令系统">
+                        <span class="hidden-mobile">计算机组成原理期末复习（六）指令系统</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -829,7 +881,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
     </div>
   
   

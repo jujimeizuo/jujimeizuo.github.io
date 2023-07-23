@@ -7,30 +7,30 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="jujimeizuo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[toc] 前置要求nodejs高版本可能不兼容，需要版本在v10左右。 https:&#x2F;&#x2F;nodejs.org&#x2F;download&#x2F;release&#x2F;v10.21.0&#x2F; 更换镜像12npm config get registrynpm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org  安装1npm uninstall -g gitbook-cli">
+    <meta name="description" content="[toc]  前置要求  nodejs 高版本可能不兼容，需要版本在v10左右。 https:&#x2F;&#x2F;nodejs.org&#x2F;download&#x2F;release&#x2F;v10.21.0&#x2F;  更换镜像 12npm config get registrynpm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org  安装 1npm uninstall -g gitb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gitbook 入门">
 <meta property="og:url" content="http://example.com/2023/01/18/output/gitbook-introduction/index/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[toc] 前置要求nodejs高版本可能不兼容，需要版本在v10左右。 https:&#x2F;&#x2F;nodejs.org&#x2F;download&#x2F;release&#x2F;v10.21.0&#x2F; 更换镜像12npm config get registrynpm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org  安装1npm uninstall -g gitbook-cli">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="[toc]  前置要求  nodejs 高版本可能不兼容，需要版本在v10左右。 https:&#x2F;&#x2F;nodejs.org&#x2F;download&#x2F;release&#x2F;v10.21.0&#x2F;  更换镜像 12npm config get registrynpm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org  安装 1npm uninstall -g gitb">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-18T00:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-23T08:03:36.076Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="jujimeizuo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Gitbook 入门 - Hexo</title>
+  <title>Gitbook 入门 - jujimeizuoの博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -110,7 +110,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -123,7 +127,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>jujimeizuo</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -310,13 +314,16 @@
               <div class="markdown-body">
                 
                 <p>[toc]</p>
-<h1 id="前置要求"><a href="#前置要求" class="headerlink" title="前置要求"></a>前置要求</h1><h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><p>高版本可能不兼容，需要版本在v10左右。 <a target="_blank" rel="noopener" href="https://nodejs.org/download/release/v10.21.0/">https://nodejs.org/download/release/v10.21.0/</a></p>
-<h2 id="更换镜像"><a href="#更换镜像" class="headerlink" title="更换镜像"></a>更换镜像</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm config get registry<br>npm config <span class="hljs-built_in">set</span> registry https://registry.npm.taobao.org<br></code></pre></td></tr></table></figure>
-
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm uninstall -g gitbook-cli<br></code></pre></td></tr></table></figure>
-
+<h1 id="前置要求"><a class="markdownIt-Anchor" href="#前置要求"></a> 前置要求</h1>
+<h2 id="nodejs"><a class="markdownIt-Anchor" href="#nodejs"></a> nodejs</h2>
+<p>高版本可能不兼容，需要版本在v10左右。 <a target="_blank" rel="noopener" href="https://nodejs.org/download/release/v10.21.0/">https://nodejs.org/download/release/v10.21.0/</a></p>
+<h2 id="更换镜像"><a class="markdownIt-Anchor" href="#更换镜像"></a> 更换镜像</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm config get registry<br>npm config <span class="hljs-built_in">set</span> registry https://registry.npm.taobao.org<br></code></pre></td></tr></table></figure>
+<h1 id="安装"><a class="markdownIt-Anchor" href="#安装"></a> 安装</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm uninstall -g gitbook-cli<br></code></pre></td></tr></table></figure>
 <p>安装完之后用<code>gitbook -V</code>查看版本，自动install gitbook。</p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">gitbook -V      查看版本号<br>gitbook init    初始化<br>gitbook serve   预览<br>gitbook build   生成<br>gitbook build --gitbook=2.6.7 生成时指定gitbook的版本, 本地没有会先下载<br>gitbook uninstall 2.6.7   卸载指定版本号的gitbook<br>gitbook fetch [version]      获取[版本]下载并安装&lt;版本&gt;<br>gitbook --<span class="hljs-built_in">help</span>   显示帮助文档<br>gitbook ls-remote  列出NPM上的可用版本：<br></code></pre></td></tr></table></figure>
+<h1 id="使用"><a class="markdownIt-Anchor" href="#使用"></a> 使用</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">gitbook -V      查看版本号<br>gitbook init    初始化<br>gitbook serve   预览<br>gitbook build   生成<br>gitbook build --gitbook=2.6.7 生成时指定gitbook的版本, 本地没有会先下载<br>gitbook uninstall 2.6.7   卸载指定版本号的gitbook<br>gitbook fetch [version]      获取[版本]下载并安装&lt;版本&gt;<br>gitbook --<span class="hljs-built_in">help</span>   显示帮助文档<br>gitbook ls-remote  列出NPM上的可用版本：<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -362,7 +369,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>jujimeizuo</div>
         </div>
       
       
@@ -523,7 +530,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
     </div>
   
   

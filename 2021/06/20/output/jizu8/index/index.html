@@ -7,51 +7,51 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="jujimeizuo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="8.1 微操作命令的分析8.1.1 取指周期  8.1.2 间址周期间址周期完成取操作数有效地址的任务。   8.1.3 执行周期          8.2 例题  （1）（2）（3）在上面 （4）">
+    <meta name="description" content="8.1 微操作命令的分析  8.1.1 取指周期    8.1.2 间址周期 间址周期完成取操作数有效地址的任务。    8.1.3 执行周期           8.2 例题   （1）（2）（3）在上面 （4）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机组成原理期末复习（八）控制单元的功能">
 <meta property="og:url" content="http://example.com/2021/06/20/output/jizu8/index/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="8.1 微操作命令的分析8.1.1 取指周期  8.1.2 间址周期间址周期完成取操作数有效地址的任务。   8.1.3 执行周期          8.2 例题  （1）（2）（3）在上面 （4）">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="8.1 微操作命令的分析  8.1.1 取指周期    8.1.2 间址周期 间址周期完成取操作数有效地址的任务。    8.1.3 执行周期           8.2 例题   （1）（2）（3）在上面 （4）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/2D6AC65A-597D-4AC6-92B1-DF95B1F4EF6F.png">
-<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
-<meta property="og:image" content="http://example.com/images/867498D7-4CAF-47CC-86D8-F4CA93620BDB.png">
-<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
-<meta property="og:image" content="http://example.com/images/287A4FCE-31E2-4AC0-A483-643F53982B68.png">
-<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
-<meta property="og:image" content="http://example.com/images/6F4D6516-67E5-4D3A-A3EC-651064F6C876.png">
-<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
-<meta property="og:image" content="http://example.com/images/2CBA798F-1060-4ABF-98C8-8914A5D8F5BC.png">
-<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
-<meta property="og:image" content="http://example.com/images/E33C4124-D6BA-4FAE-9C38-8730792D74A0.png">
-<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
-<meta property="og:image" content="http://example.com/images/7BB164DB-DEA0-468E-864F-41A86D0BC2AF.png">
-<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
-<meta property="og:image" content="http://example.com/images/69C9C3A7-5209-455B-A95E-C66CBCA5AF4E.png">
-<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
-<meta property="og:image" content="http://example.com/images/4.png">
-<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
-<meta property="og:image" content="http://example.com/images/7FE27029-750B-4D7D-A23B-2244F25BD13E.png">
-<meta property="og:image" content="http://example.com/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/2D6AC65A-597D-4AC6-92B1-DF95B1F4EF6F.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/867498D7-4CAF-47CC-86D8-F4CA93620BDB.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/287A4FCE-31E2-4AC0-A483-643F53982B68.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/6F4D6516-67E5-4D3A-A3EC-651064F6C876.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/2CBA798F-1060-4ABF-98C8-8914A5D8F5BC.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/E33C4124-D6BA-4FAE-9C38-8730792D74A0.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/7BB164DB-DEA0-468E-864F-41A86D0BC2AF.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/69C9C3A7-5209-455B-A95E-C66CBCA5AF4E.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/4.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/VC9YM177S3GJAIBM2.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/7FE27029-750B-4D7D-A23B-2244F25BD13E.png">
+<meta property="og:image" content="http://example.com/2021/06/20/output/jizu8/index/images/VC9YM177S3GJAIBM2.png">
 <meta property="article:published_time" content="2021-06-20T00:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-23T08:03:35.275Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="jujimeizuo">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/2D6AC65A-597D-4AC6-92B1-DF95B1F4EF6F.png">
+<meta name="twitter:image" content="http://example.com/2021/06/20/output/jizu8/index/images/2D6AC65A-597D-4AC6-92B1-DF95B1F4EF6F.png">
   
   
   
-  <title>计算机组成原理期末复习（八）控制单元的功能 - Hexo</title>
+  <title>计算机组成原理期末复习（八）控制单元的功能 - jujimeizuoの博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -131,7 +131,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -144,7 +148,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>jujimeizuo</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -330,24 +334,29 @@
             
               <div class="markdown-body">
                 
-                <h2 id="8-1-微操作命令的分析"><a href="#8-1-微操作命令的分析" class="headerlink" title="8.1 微操作命令的分析"></a>8.1 微操作命令的分析</h2><h3 id="8-1-1-取指周期"><a href="#8-1-1-取指周期" class="headerlink" title="8.1.1 取指周期"></a>8.1.1 取指周期</h3><p><img src="/images/2D6AC65A-597D-4AC6-92B1-DF95B1F4EF6F.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="8-1-2-间址周期"><a href="#8-1-2-间址周期" class="headerlink" title="8.1.2 间址周期"></a>8.1.2 间址周期</h3><p>间址周期完成取操作数有效地址的任务。</p>
-<p><img src="/images/867498D7-4CAF-47CC-86D8-F4CA93620BDB.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="8-1-3-执行周期"><a href="#8-1-3-执行周期" class="headerlink" title="8.1.3 执行周期"></a>8.1.3 执行周期</h3><p><img src="/images/287A4FCE-31E2-4AC0-A483-643F53982B68.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/images/6F4D6516-67E5-4D3A-A3EC-651064F6C876.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/images/2CBA798F-1060-4ABF-98C8-8914A5D8F5BC.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/images/E33C4124-D6BA-4FAE-9C38-8730792D74A0.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
-<p> </p>
-<h2 id="8-2-例题"><a href="#8-2-例题" class="headerlink" title="8.2 例题"></a>8.2 例题</h2><blockquote>
-<p><img src="/images/7BB164DB-DEA0-468E-864F-41A86D0BC2AF.png" srcset="/img/loading.gif" lazyload><img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+                <h2 id="81-微操作命令的分析"><a class="markdownIt-Anchor" href="#81-微操作命令的分析"></a> 8.1 微操作命令的分析</h2>
+<h3 id="811-取指周期"><a class="markdownIt-Anchor" href="#811-取指周期"></a> 8.1.1 取指周期</h3>
+<p><img src="images/2D6AC65A-597D-4AC6-92B1-DF95B1F4EF6F.png" srcset="/img/loading.gif" lazyload alt="" /> <img src="images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h3 id="812-间址周期"><a class="markdownIt-Anchor" href="#812-间址周期"></a> 8.1.2 间址周期</h3>
+<p>间址周期完成取操作数有效地址的任务。</p>
+<p><img src="images/867498D7-4CAF-47CC-86D8-F4CA93620BDB.png" srcset="/img/loading.gif" lazyload alt="" /> <img src="images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h3 id="813-执行周期"><a class="markdownIt-Anchor" href="#813-执行周期"></a> 8.1.3 执行周期</h3>
+<p><img src="images/287A4FCE-31E2-4AC0-A483-643F53982B68.png" srcset="/img/loading.gif" lazyload alt="" /> <img src="images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="images/6F4D6516-67E5-4D3A-A3EC-651064F6C876.png" srcset="/img/loading.gif" lazyload alt="" /> <img src="images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="images/2CBA798F-1060-4ABF-98C8-8914A5D8F5BC.png" srcset="/img/loading.gif" lazyload alt="" /> <img src="images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="images/E33C4124-D6BA-4FAE-9C38-8730792D74A0.png" srcset="/img/loading.gif" lazyload alt="" /> <img src="images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p></p>
+<h2 id="82-例题"><a class="markdownIt-Anchor" href="#82-例题"></a> 8.2 例题</h2>
+<blockquote>
+<p><img src="images/7BB164DB-DEA0-468E-864F-41A86D0BC2AF.png" srcset="/img/loading.gif" lazyload alt="" /><img src="images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <p>（1）（2）（3）在上面</p>
 <p>（4）</p>
-<p><img src="/images/69C9C3A7-5209-455B-A95E-C66CBCA5AF4E.png" srcset="/img/loading.gif" lazyload><img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="images/69C9C3A7-5209-455B-A95E-C66CBCA5AF4E.png" srcset="/img/loading.gif" lazyload alt="" /><img src="images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 </blockquote>
-<p> </p>
+<p></p>
 <blockquote>
-<p><img src="/images/4.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/images/7FE27029-750B-4D7D-A23B-2244F25BD13E.png" srcset="/img/loading.gif" lazyload> <img src="/images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="images/4.png" srcset="/img/loading.gif" lazyload alt="" /> <img src="images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="images/7FE27029-750B-4D7D-A23B-2244F25BD13E.png" srcset="/img/loading.gif" lazyload alt="" /> <img src="images/VC9YM177S3GJAIBM2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 </blockquote>
 
                 
@@ -394,7 +403,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>jujimeizuo</div>
         </div>
       
       
@@ -432,9 +441,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/06/25/output/vc/index/" title="桌面应用开发期末复习——VC++">
+                      <a href="/2021/06/20/output/jizu7/index/" title="计算机组成原理期末复习（七）CPU的结构和性能">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">桌面应用开发期末复习——VC++</span>
+                        <span class="hidden-mobile">计算机组成原理期末复习（七）CPU的结构和性能</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -442,8 +451,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/06/20/output/jizu6/index/" title="计算机组成原理期末复习（六）指令系统">
-                        <span class="hidden-mobile">计算机组成原理期末复习（六）指令系统</span>
+                      <a href="/2021/06/20/output/shuzituxiang8/index/" title="数字图像处理期末复习（八）图像特征提取">
+                        <span class="hidden-mobile">数字图像处理期末复习（八）图像特征提取</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -555,7 +564,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
     </div>
   
   
