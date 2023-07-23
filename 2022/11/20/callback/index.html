@@ -1,0 +1,784 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="jujimeizuo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="回调函数是做为参数传递的一种函数，在早期C样式编程当中，回调函数必须依赖函数指针来实现。 而后的C++语言当中，又引入了 std::function 与 std::bind 来配合进行回调函数实现。 标准库中有大量函数应用到了回调函数，其中 std::sort 就是一个经典例子。 一、 回调函数回调函数的创建步骤大概为： 1，声明一个函数指针类型。 2，拟写使用回调函数的函数，将函数指针类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 回调函数及 std::function 与 std::bind">
+<meta property="og:url" content="http://example.com/2022/11/20/callback/index.html">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="回调函数是做为参数传递的一种函数，在早期C样式编程当中，回调函数必须依赖函数指针来实现。 而后的C++语言当中，又引入了 std::function 与 std::bind 来配合进行回调函数实现。 标准库中有大量函数应用到了回调函数，其中 std::sort 就是一个经典例子。 一、 回调函数回调函数的创建步骤大概为： 1，声明一个函数指针类型。 2，拟写使用回调函数的函数，将函数指针类型">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-20T13:32:56.000Z">
+<meta property="article:modified_time" content="2023-07-23T09:57:21.205Z">
+<meta property="article:author" content="jujimeizuo">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>C++ 回调函数及 std::function 与 std::bind - jujimeizuoの博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"e65Vq77rqmkDQc43KkFYR8ZF-gzGzoHsz","app_key":"1cs4DEmISk68uBVHcT5hi89N","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>jujimeizuo</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/banner.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="C++ 回调函数及 std::function 与 std::bind"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-20 21:32" pubdate>
+          2022年11月20日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          33 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">C++ 回调函数及 std::function 与 std::bind</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>   <strong>回调函数是做为参数传递的一种函数</strong>，在早期C样式编程当中，回调函数必须依赖函数指针来实现。</p>
+<p>而后的C++语言当中，又引入了 std::function 与 std::bind 来配合进行回调函数实现。</p>
+<p>标准库中有大量函数应用到了回调函数，其中 std::sort 就是一个经典例子。</p>
+<h1 id="一、-回调函数"><a href="#一、-回调函数" class="headerlink" title="一、 回调函数"></a>一、 回调函数</h1><p>回调函数的创建步骤大概为：</p>
+<p>1，声明一个函数指针类型。</p>
+<p>2，拟写使用回调函数的函数，将函数指针类型及变量名声明作为参数传递。</p>
+<p>3，拟写符合函数指针类型的实现函数，将实现函数的指针作为参数传递给使用它的函数。</p>
+<p>下面演示了一个最简单的回调函数定义及使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">int</span> <span class="hljs-params">(*Calc)</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span></span>;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">CalcValue</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">const</span> Calc &amp;func)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">func</span>(a, b);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a = <span class="hljs-number">4</span>;<br>    <span class="hljs-type">int</span> b = <span class="hljs-number">6</span>;<br>    <span class="hljs-type">int</span> c = <span class="hljs-built_in">CalcValue</span>(a, b, Add);<br><br>    std::cout &lt;&lt; <span class="hljs-string">&quot;Value: &quot;</span> &lt;&lt; c &lt;&lt; std::endl;<br>    <span class="hljs-keyword">return</span> EXIT_SUCCESS;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，我们通过语法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">int</span> <span class="hljs-params">(*Calc)</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>来定义了回调函数的指针类型，包括返回值类型、(*类型名)函数指针、参数表。</p>
+<p>继而又定义并且实现了回调函数的使用者函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">CalcValue</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">const</span> Calc &amp;func)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">func</span>(a, b);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>再去定义并实现符合函数指针类型的实现函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>必须要注意的是，实现函数的类型必须要和函数指针的类型声明一致，也就是返回值和参数表（个数、类型）要完全一致。</p>
+<p>这样就完成了一个简单且最基本的回调函数。</p>
+<p>那么，回调函数是什么情况下使用的呢？</p>
+<p>举个最经典的例子就是 <code>std::sort</code>，当你需要给一个存储有自定义结构体的 vector 进行排序时，编译器是无法知道如何对自定义结构体进行排序的。</p>
+<p>这时候就需要实现一个回调函数来告诉编译器如何排序：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">DataPool</span> &#123;<br>    <span class="hljs-type">int</span> value = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> date = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">DataPool</span>(<span class="hljs-type">int</span> v, <span class="hljs-type">int</span> d) : <span class="hljs-built_in">value</span>(v), <span class="hljs-built_in">date</span>(d) &#123;&#125;;<br>&#125;DataPool;<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">SortCallBack</span><span class="hljs-params">(<span class="hljs-type">const</span> DataPool &amp;a, <span class="hljs-type">const</span> DataPool&amp; b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a.value &lt; b.value;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    vector&lt;DataPool&gt; vec;<br>    vec.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">DataPool</span>(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>));<br>    vec.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">DataPool</span>(<span class="hljs-number">5</span>, <span class="hljs-number">2</span>));<br>    vec.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">DataPool</span>(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>));<br><br>    std::<span class="hljs-built_in">sort</span>(vec.<span class="hljs-built_in">begin</span>(), vec.<span class="hljs-built_in">end</span>(), SortCallBack);<br>    <span class="hljs-keyword">return</span> EXIT_SUCCESS;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这样，就相当于自定义了 struct 的排序规则，自然编译器也可以使用 <code>std::sort</code> 对自定义 struct 进行排序操作。</p>
+<h1 id="二、std-function-与-std-bind"><a href="#二、std-function-与-std-bind" class="headerlink" title="二、std::function 与 std::bind"></a>二、std::function 与 std::bind</h1><p>上面演示了最简单的回调函数创建及使用，然而，上面的代码却出现了一个局限性，就是：</p>
+<p>如果需要去回调一个类成员函数，函数指针则无法指向类成员函数。</p>
+<p>在基本C样式面向过程编程当中，这种局限性并不那么明显甚至可以说不存在。但是到了C++当中，这种弊端就显而易见了，解决方式便是使用 std::function 与 std::bind 互相配合。</p>
+<p>它们的头文件是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;functional&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>std::function</li>
+</ul>
+<p>std::function 是一个模板类。作用是对C++中的可调用对象进行包装，例如普通函数、成员函数、模板函数、静态函数、lambda表达式等。</p>
+<p>它的最基本的作用是，简化调用的复杂程度，统一调用的方式。如果代码中混杂着大量普通函数、模板函数、lambda，使用 std::function 是非常有必要的。</p>
+<p>语法是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++">【伪代码】std::function&lt;returnType(argType, argType，...)&gt; func;<br><br>【常规情况】std::function&lt;<span class="hljs-type">int</span>(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>)&gt; func;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，这个模板类当中对类型的声明方式是 &lt; 返回值类型 ( 参数类型1, 参数类型2, …) &gt;。</p>
+<p>你几乎可以拿它包装任何可调用对象，只需简单粗暴的将可调用对象作为右值赋值给它：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">CompareInt</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a &gt; b;<br>&#125;<br><br>std::function&lt;<span class="hljs-type">bool</span>(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>)&gt; compareFunc = CompareInt;<br></code></pre></td></tr></table></figure>
+
+<p>那么如何使用它来调用类成员函数呢？这时就需要用到经常与 <code>std::function</code> 配合使用的 <code>std::bind</code>。</p>
+<ul>
+<li>std::bind</li>
+</ul>
+<p>它是一个基于模板的函数，顾明思意它的作用是绑定并返回一个 std::function 对象。</p>
+<p>那么什么是“绑定”？它本身作为延迟计算的思想的一种实现，作为一个调用过程当中的转发者而存在，返回一个 <code>std::function</code> 对象。</p>
+<p>它与 <code>std::function</code> 不同的是，function 是模板类，bind 是模板函数，而 bind 返回的可调用对象可以直接给 function 进行包装并保存。</p>
+<p>为什么要进行“包装”与“转发”呢？</p>
+<p>首先，不规范的解释是，function 的作用是包装，它可以包装类成员函数，但却无法生成类成员函数的可调用对象。而 <code>std::bind</code> 则是可以生成。</p>
+<p>因此，function 与 bind 结合后，便成为了 C++ 中类成员函数作为回调函数的一种规范的实现方式。</p>
+<p><code>std::bind</code> 的语法是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br><br><span class="hljs-comment">/* --- 普通函数 --- */</span><br>【伪代码】std::<span class="hljs-built_in">bind</span>(&amp;funcName, std::placeholders::_1, ...);<br><br>【常规情况】std::<span class="hljs-built_in">bind</span>(&amp;Add, std::placeholders::_1, std::placeholders::_2);<br><br><span class="hljs-comment">/* --- 类成员函数 --- */</span><br>【伪代码】std::<span class="hljs-built_in">bind</span>(&amp;className::funcName, classPtr, std::placeholders::_1, ...);<br><br>【常规情况】std::<span class="hljs-built_in">bind</span>(&amp;BrainToolBox::Add, brain, std::placeholders::_1, std::placeholders::_2);<br></code></pre></td></tr></table></figure>
+
+<p>当用作普通函数的绑定时，第一个参数是可调用对象(普通函数、lambda等)，而第二个参数开始对应可调用对象的参数表。</p>
+<p><code>std::placeholders::_1</code> 代表可调用对象的第一个参数，<code>_2</code>就代表第二个参数，依此类推。</p>
+<p>当用作类成员函数的绑定时，第一个参数仍然是作为类成员的可调用对象引用，第二个参数则是对象的指针，而第三个参数开始对应可调用对象的参数表。</p>
+<p>同样使用 <code>std::placeholders::_*</code> 依次向后推。</p>
+<p>所以，与 <code>std::function</code> 相结合，便可以实现对类成员函数的调用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">BrainToolBox</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123; <span class="hljs-keyword">return</span> a + b; &#125;;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a = <span class="hljs-number">4</span>;<br>    <span class="hljs-type">int</span> b = <span class="hljs-number">6</span>;<br><br>    std::shared_ptr&lt;BrainToolBox&gt; brain = std::<span class="hljs-built_in">make_shared</span>&lt;BrainToolBox&gt;();<br>    std::function&lt;<span class="hljs-type">int</span>(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>)&gt; addFunc = std::<span class="hljs-built_in">bind</span>(&amp;BrainToolBox::Add, brain, std::placeholders::_1, std::placeholders::_2);<br><br>　　 <span class="hljs-type">int</span> c = <span class="hljs-built_in">addFunc</span>(a, b);<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;c Value: &quot;</span> &lt;&lt; c &lt;&lt; std::endl;<br><br>    <span class="hljs-keyword">return</span> EXIT_SUCCESS;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对 <code>std::bind</code> 的额外注解：</p>
+<blockquote>
+<p>1，调用指向非静态成员函数指针或指向非静态数据成员指针时，首参数必须是引用或指针（可以包含智能指针，如 std::shared_ptr 与 std::unique_ptr），指向将访问其成员的对象。 2，到 bind 的参数被复制或移动，而且决不按引用传递，除非包装于 std::ref 或 std::cref 。 3，允许同一 bind 表达式中的多重占位符（例如多个 _1 ），但结果仅若对应参数（ u1 ）是左值或不可移动右值才良好定义。</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/C/" class="category-chain-item">C++</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>C++ 回调函数及 std::function 与 std::bind</div>
+      <div>http://example.com/2022/11/20/callback/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>jujimeizuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/12/03/atcoder-abc280/" title="Atcoder ABC280">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Atcoder ABC280</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/18/getfilenumber/" title="Linux统计文件夹下的文件数目">
+                        <span class="hidden-mobile">Linux统计文件夹下的文件数目</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

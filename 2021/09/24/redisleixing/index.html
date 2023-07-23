@@ -1,0 +1,928 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="jujimeizuo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. NoSQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rediss-数据类型">
+<meta property="og:url" content="http://example.com/2021/09/24/redisleixing/index.html">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="1. NoSQL">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632646360378.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632646410269.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632646422141.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632646442039.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632473946054.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474345917.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474418121.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474452155.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474513302.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474553482.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474583601.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474622298.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474665561.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474717857.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474728589.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474775307.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632643699298.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475047844.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475096207.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475184254.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475254467.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475380084.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475484205.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475553716.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632643911652.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475948773.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476072915.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476697115.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476474867.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476522194.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476605108.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476724171.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476771483.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476803379.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476840575.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476896464.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632643954408.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477064797.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477127825.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477143763.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477172245.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477185068.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477211405.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477222068.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477296157.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477331468.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477435541.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477391019.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477447668.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632643989267.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477692339.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477703371.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477745829.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477816044.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477844890.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477866011.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477881187.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477896459.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477919981.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644102803.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478034715.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478071159.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478107108.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478230841.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478172600.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478326343.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644429996.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644452415.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644484448.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644672064.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644689711.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644719576.png">
+<meta property="article:published_time" content="2021-09-24T11:43:12.000Z">
+<meta property="article:modified_time" content="2023-07-23T09:31:35.843Z">
+<meta property="article:author" content="jujimeizuo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632646360378.png">
+  
+  
+  
+  <title>rediss-数据类型 - jujimeizuoの博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"e65Vq77rqmkDQc43KkFYR8ZF-gzGzoHsz","app_key":"1cs4DEmISk68uBVHcT5hi89N","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>jujimeizuo</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/banner.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="rediss-数据类型"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-09-24 19:43" pubdate>
+          2021年9月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          44 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">rediss-数据类型</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-NoSQL"><a href="#1-NoSQL" class="headerlink" title="1. NoSQL"></a>1. NoSQL</h1><span id="more"></span>
+<p>NoSQL(Not Only SQL )，意即不仅仅是SQL, 泛指非关系型的数据库。Nosql这个技术门类,早期就有人提出,发展至2009年趋势越发高涨。</p>
+<h2 id="1-1-单机Mysql时代"><a href="#1-1-单机Mysql时代" class="headerlink" title="1.1 单机Mysql时代"></a>1.1 单机Mysql时代</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632646360378.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="1-2-Memcached-缓存-Mysql-垂直拆分（读写分离）"><a href="#1-2-Memcached-缓存-Mysql-垂直拆分（读写分离）" class="headerlink" title="1.2 Memcached(缓存) + Mysql + 垂直拆分（读写分离）"></a>1.2 Memcached(缓存) + Mysql + 垂直拆分（读写分离）</h2><p>网站80%的情况都是在读，每次都要去查询数据库的话就十分的麻烦！所以说我们希望减轻数据库的压力，我们可以使用缓存来保证效率！ <img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632646410269.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="1-3-分库分表-水平拆分-Mysql集群"><a href="#1-3-分库分表-水平拆分-Mysql集群" class="headerlink" title="1.3 分库分表 + 水平拆分 + Mysql集群"></a>1.3 分库分表 + 水平拆分 + Mysql集群</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632646422141.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="1-4-如今最近的年代"><a href="#1-4-如今最近的年代" class="headerlink" title="1.4 如今最近的年代"></a>1.4 如今最近的年代</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632646442039.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h1 id="2-为什么是NoSQL"><a href="#2-为什么是NoSQL" class="headerlink" title="2. 为什么是NoSQL"></a>2. 为什么是NoSQL</h1><p><strong>NoSQL &#x3D; Not Only SQL（不仅仅是SQL）</strong></p>
+<p>Not Only Structured Query Language</p>
+<p>关系型数据库：列+行，同一个表下数据的结构是一样的。</p>
+<p>非关系型数据库：数据存储没有固定的格式，并且可以进行横向扩展。</p>
+<p>NoSQL泛指非关系型数据库，随着web2.0互联网的诞生，传统的关系型数据库很难对付web2.0时代！尤其是超大规模的高并发的社区，暴露出来很多难以克服的问题，NoSQL在当今大数据环境下发展的十分迅速，Redis是发展最快的。</p>
+<p>随着互联网网站的兴起，传统的关系数据库在应付动态网站，特别是超大规模和高并发的纯动态网站已经显得力不从心，暴露了很多难以克服的问题。如商城网站中对<strong>商品数据频繁查询</strong>、<strong>对热搜商品的排行统计</strong>、<strong>订单超时问题</strong>、以及<strong>微信朋友圈（音频，视频）存储</strong>等相关使用传统的关系型数据库实现就显得非常复杂，虽然能实现相应功能但是在性能上却不是那么乐观。nosql这个技术门类的出现，更好的解决了这些问题，它告诉了世界不仅仅是sql。</p>
+<p><strong>了解：3V + 3高</strong></p>
+<p>大数据时代的3V ：主要是描述问题的</p>
+<ol>
+<li>海量Velume</li>
+<li>多样Variety</li>
+<li>实时Velocity</li>
+</ol>
+<p>大数据时代的3高 ： 主要是对程序的要求</p>
+<ol>
+<li>高并发</li>
+<li>高可扩</li>
+<li>高性能</li>
+</ol>
+<h1 id="3-NoSQL的四大分类"><a href="#3-NoSQL的四大分类" class="headerlink" title="3. NoSQL的四大分类"></a>3. NoSQL的四大分类</h1><h2 id="3-1-键值-Key-Value-存储数据库"><a href="#3-1-键值-Key-Value-存储数据库" class="headerlink" title="3.1 键值(Key-Value)存储数据库"></a>3.1 键值(Key-Value)存储数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1.说明: </span><br>- 这一类数据库主要会使用到一个哈希表，这个表中有一个特定的键和一个指针指向特定的数据。<br><span class="hljs-comment"># 2.特点</span><br>- Key/value模型对于IT系统来说的优势在于简单、易部署。  <br>- 但是如果DBA只对部分值进行查询或更新的时候，Key/value就显得效率低下了。<br><span class="hljs-comment"># 3.相关产品</span><br>- Tokyo Cabinet/Tyrant,<br>- Redis<br>- SSDB<br>- Voldemort <br>- Oracle BDB<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-2-列存储数据库"><a href="#3-2-列存储数据库" class="headerlink" title="3.2 列存储数据库"></a>3.2 列存储数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1.说明</span><br>- 这部分数据库通常是用来应对分布式存储的海量数据。<br><span class="hljs-comment"># 2.特点</span><br>- 键仍然存在，但是它们的特点是指向了多个列。这些列是由列家族来安排的。<br><span class="hljs-comment"># 3.相关产品</span><br>- Cassandra、HBase、Riak.<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-3-文档型数据库"><a href="#3-3-文档型数据库" class="headerlink" title="3.3 文档型数据库"></a>3.3 文档型数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1.说明</span><br>- 文档型数据库的灵感是来自于Lotus Notes办公软件的，而且它同第一种键值存储相类似该类型的数据模型是版本化的文档，半结构化的文档以特定的格式存储，比如JSON。文档型数据库可 以看作是键值数据库的升级版，允许之间嵌套键值。而且文档型数据库比键值数据库的查询效率更高<br><span class="hljs-comment"># 2.特点</span><br>- 以文档形式存储<br><span class="hljs-comment"># 3.相关产品</span><br>- MongoDB、CouchDB、 MongoDb(4.x). 国内也有文档型数据库SequoiaDB，已经开源。  <br></code></pre></td></tr></table></figure>
+
+<h2 id="3-4-图形-Graph-数据库"><a href="#3-4-图形-Graph-数据库" class="headerlink" title="3.4 图形(Graph)数据库"></a>3.4 图形(Graph)数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1.说明</span><br>- 图形结构的数据库同其他行列以及刚性结构的SQL数据库不同，它是使用灵活的图形模型，并且能够扩展到多个服务器上。<br>- NoSQL数据库没有标准的查询语言(SQL)，因此进行数据库查询需要制定数据模型。许多NoSQL数据库都有REST式的数据接口或者查询API。<br><span class="hljs-comment"># 2.特点</span><br><span class="hljs-comment"># 3.相关产品</span><br>- Neo4J、InfoGrid、 Infinite Graph、<br></code></pre></td></tr></table></figure>
+
+<h1 id="4-NoSQL应用场景"><a href="#4-NoSQL应用场景" class="headerlink" title="4. NoSQL应用场景"></a>4. NoSQL应用场景</h1><ul>
+<li>数据模型比较简单</li>
+<li>需要灵活性更强的IT系统</li>
+<li>对数据库性能要求较高</li>
+<li>不需要高度的数据一致性</li>
+</ul>
+<h1 id="5-什么是Redis"><a href="#5-什么是Redis" class="headerlink" title="5. 什么是Redis"></a>5. 什么是Redis</h1><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632473946054.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<p>Redis 开源 遵循BSD 基于内存数据存储 被用于作为 数据库 缓存 消息中间件 <strong>redis是一个内存型的数据库</strong></p>
+<h1 id="6-Redis特点"><a href="#6-Redis特点" class="headerlink" title="6. Redis特点"></a>6. Redis特点</h1><ul>
+<li>Redis是一个高性能key&#x2F;value内存型数据库</li>
+<li>Redis支持丰富的数据类型</li>
+<li>Redis支持持久化</li>
+<li>Redis单线程,单进程</li>
+</ul>
+<p><strong>单线程不一定比多线程慢，在CPU中，多线程需要跳转，而单线程不需要，减少了跳转的消耗，所以在某些场景里单线程可能比多线程快。</strong></p>
+<h1 id="7-Ridis安装"><a href="#7-Ridis安装" class="headerlink" title="7. Ridis安装"></a>7. Ridis安装</h1><p>略</p>
+<h1 id="8-redis常用命令"><a href="#8-redis常用命令" class="headerlink" title="8. redis常用命令"></a>8. redis常用命令</h1><h2 id="8-1-set-get命令，存值，取值"><a href="#8-1-set-get命令，存值，取值" class="headerlink" title="8.1 set get命令，存值，取值"></a>8.1 set get命令，存值，取值</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474345917.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="8-2-切换数据库，redis默认有16个数据库，默认使用0号数据库，可以通过select切换"><a href="#8-2-切换数据库，redis默认有16个数据库，默认使用0号数据库，可以通过select切换" class="headerlink" title="8.2 切换数据库，redis默认有16个数据库，默认使用0号数据库，可以通过select切换"></a>8.2 切换数据库，redis默认有16个数据库，默认使用0号数据库，可以通过select切换</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474418121.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474452155.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="8-3-清空当前数据库：flushdb-清空所有数据库：flushall"><a href="#8-3-清空当前数据库：flushdb-清空所有数据库：flushall" class="headerlink" title="8.3 清空当前数据库：flushdb,清空所有数据库：flushall"></a>8.3 清空当前数据库：flushdb,清空所有数据库：flushall</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474513302.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="8-4-查询所有key-keys"><a href="#8-4-查询所有key-keys" class="headerlink" title="8.4 查询所有key: keys*"></a>8.4 查询所有key: keys*</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474553482.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="8-5-查询数据库的大小：dbsize"><a href="#8-5-查询数据库的大小：dbsize" class="headerlink" title="8.5 查询数据库的大小：dbsize"></a>8.5 查询数据库的大小：dbsize</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474583601.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="8-6-查看key是否存在：exists-keyName-存在返回1，否则返回0"><a href="#8-6-查看key是否存在：exists-keyName-存在返回1，否则返回0" class="headerlink" title="8.6 查看key是否存在：exists keyName,存在返回1，否则返回0"></a>8.6 查看key是否存在：exists keyName,存在返回1，否则返回0</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474622298.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="8-7-移除Key-move-keyName-1"><a href="#8-7-移除Key-move-keyName-1" class="headerlink" title="8.7 移除Key: move keyName 1"></a>8.7 移除Key: move keyName 1</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474665561.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="8-8-为key设置过期时间-expire-keyName-timeout"><a href="#8-8-为key设置过期时间-expire-keyName-timeout" class="headerlink" title="8.8 为key设置过期时间: expire keyName timeout"></a>8.8 为key设置过期时间: expire keyName timeout</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474717857.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="8-9-查看key的剩余存活时间：ttl-keyName"><a href="#8-9-查看key的剩余存活时间：ttl-keyName" class="headerlink" title="8.9 查看key的剩余存活时间：ttl keyName"></a>8.9 查看key的剩余存活时间：ttl keyName</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474728589.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="8-10-查看key的类型：type-keyName"><a href="#8-10-查看key的类型：type-keyName" class="headerlink" title="8.10 查看key的类型：type keyName"></a>8.10 查看key的类型：type keyName</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632474775307.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h1 id="9-String详解"><a href="#9-String详解" class="headerlink" title="9. String详解"></a>9. String详解</h1><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632643699298.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>命令                         说明                      <br>-------------------------  ----------------------- <br><span class="hljs-built_in">set</span>                        设置一个key/value           <br>get                        根据key获得对应的value         <br>mset                       一次设置多个key value         <br>mget                       一次获得多个key的value         <br>getset                     获得原始key的值，同时设置新值        <br>strlen                     获得对应key存储value的长度       <br>append                     为对应key的value追加内容        <br>getrange 索引0开始             截取value的内容              <br>setex                      设置一个key存活的有效期（秒）        <br>psetex                     设置一个key存活的有效期（毫秒）       <br>setnx                      存在不做任何操作,不存在添加          <br>msetnx原子操作(只要有一个存在不做任何操作)  可以同时设置多个key,只有有一个存在都不保存 <br>decr                       进行数值类型的-1操作             <br>decrby                     根据提供的数据进行减法操作           <br>Incr                       进行数值类型的+1操作             <br>incrby                     根据提供的数据进行加法操作           <br>Incrbyfloat                根据提供的数据加入浮点数            <br></code></pre></td></tr></table></figure>
+
+<h2 id="9-1-strlen-求value的长度，append：追加"><a href="#9-1-strlen-求value的长度，append：追加" class="headerlink" title="9.1 strlen:求value的长度，append：追加"></a>9.1 strlen:求value的长度，append：追加</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475047844.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="9-2-自增-自减操作：incr-incrby-decr-decrby"><a href="#9-2-自增-自减操作：incr-incrby-decr-decrby" class="headerlink" title="9.2 自增,自减操作：incr incrby decr decrby"></a>9.2 自增,自减操作：incr incrby decr decrby</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475096207.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="9-3-字符串的范围操作：getrange-setrange"><a href="#9-3-字符串的范围操作：getrange-setrange" class="headerlink" title="9.3 字符串的范围操作：getrange,setrange"></a>9.3 字符串的范围操作：getrange,setrange</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475184254.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="9-4-设置过期时间：setex（如果存在Key则覆盖，不存在则创建），setnx-如果不存在就设置"><a href="#9-4-设置过期时间：setex（如果存在Key则覆盖，不存在则创建），setnx-如果不存在就设置" class="headerlink" title="9.4 设置过期时间：setex（如果存在Key则覆盖，不存在则创建），setnx(如果不存在就设置)"></a>9.4 设置过期时间：setex（如果存在Key则覆盖，不存在则创建），setnx(如果不存在就设置)</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475254467.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="9-5-批量设置和获取值：mset-mget-msetnx-操作为原子性，要么都成功，要么都失败"><a href="#9-5-批量设置和获取值：mset-mget-msetnx-操作为原子性，要么都成功，要么都失败" class="headerlink" title="9.5 批量设置和获取值：mset,mget, msetnx(操作为原子性，要么都成功，要么都失败)"></a>9.5 批量设置和获取值：mset,mget, msetnx(操作为原子性，要么都成功，要么都失败)</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475380084.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="9-6-存取对象"><a href="#9-6-存取对象" class="headerlink" title="9.6 存取对象"></a>9.6 存取对象</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475484205.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="9-7-组合操作：getset先获取再设置-如果不存在就返回nil"><a href="#9-7-组合操作：getset先获取再设置-如果不存在就返回nil" class="headerlink" title="9.7 组合操作：getset先获取再设置,如果不存在就返回nil"></a>9.7 组合操作：getset先获取再设置,如果不存在就返回nil</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475553716.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<blockquote>
+<p>String类似的使用场景：value除了是我们的字符串还可以是我们的数字！</p>
+<ul>
+<li>计数器</li>
+<li>统计多单位的数量</li>
+<li>粉丝数</li>
+<li>对象缓存存储</li>
+</ul>
+</blockquote>
+<h1 id="10-list详解"><a href="#10-list详解" class="headerlink" title="10. list详解"></a>10. list详解</h1><p>list的命令都是l开头,list 列表 相当于java中list 集合 特点 元素有序 且 可以重复</p>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632643911652.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">命令       说明                    <br>-------  --------------------- <br>lpush    将某个值加入到一个key列表头部      <br>lpushx   同lpush,但是必须要保证这个key存在 <br>rpush    将某个值加入到一个key列表末尾      <br>rpushx   同rpush,但是必须要保证这个key存在 <br>lpop     返回和移除列表左边的第一个元素       <br>rpop     返回和移除列表右边的第一个元素       <br>lrange   获取某一个下标区间内的元素         <br>llen     获取列表元素个数              <br>lset     设置某一个指定索引的值(索引必须存在)   <br>lindex   获取某一个指定索引位置的元素        <br>lrem     删除重复元素                <br>ltrim    保留列表中特定区间内的元素         <br>linsert  在某一个元素之前，之后插入新元素      <br></code></pre></td></tr></table></figure>
+
+<h2 id="10-1-左插：lpush-左删：lpop"><a href="#10-1-左插：lpush-左删：lpop" class="headerlink" title="10.1 左插：lpush,左删：lpop"></a>10.1 左插：lpush,左删：lpop</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632475948773.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="10-2-右插：rpush-右删：rpop"><a href="#10-2-右插：rpush-右删：rpop" class="headerlink" title="10.2 右插：rpush,右删：rpop"></a>10.2 右插：rpush,右删：rpop</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476072915.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="10-3-获取列表元素：lrange"><a href="#10-3-获取列表元素：lrange" class="headerlink" title="10.3 获取列表元素：lrange"></a>10.3 获取列表元素：lrange</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476697115.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="10-4-通过下标获取元素：lindex"><a href="#10-4-通过下标获取元素：lindex" class="headerlink" title="10.4 通过下标获取元素：lindex"></a>10.4 通过下标获取元素：lindex</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476474867.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="10-5-获取列表长度：llen"><a href="#10-5-获取列表长度：llen" class="headerlink" title="10.5 获取列表长度：llen"></a>10.5 获取列表长度：llen</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476522194.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="10-6-移除具体的值所在的键值对-lrem-列表-移除几个-移除的具体value"><a href="#10-6-移除具体的值所在的键值对-lrem-列表-移除几个-移除的具体value" class="headerlink" title="10.6 移除具体的值所在的键值对:lrem 列表 移除几个 移除的具体value"></a>10.6 移除具体的值所在的键值对:lrem 列表 移除几个 移除的具体value</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476605108.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="10-7-截取操作：ltrim-列表-截取的开始下标-截取的结束下标"><a href="#10-7-截取操作：ltrim-列表-截取的开始下标-截取的结束下标" class="headerlink" title="10.7 截取操作：ltrim 列表 截取的开始下标 截取的结束下标"></a>10.7 截取操作：ltrim 列表 截取的开始下标 截取的结束下标</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476724171.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="10-8-rpoplpush-移除列表中的最后一个元素并将这个元素放到一个新的列表中"><a href="#10-8-rpoplpush-移除列表中的最后一个元素并将这个元素放到一个新的列表中" class="headerlink" title="10.8 rpoplpush:移除列表中的最后一个元素并将这个元素放到一个新的列表中"></a>10.8 rpoplpush:移除列表中的最后一个元素并将这个元素放到一个新的列表中</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476771483.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="10-9-判断列表是否存在：EXISTS-list"><a href="#10-9-判断列表是否存在：EXISTS-list" class="headerlink" title="10.9 判断列表是否存在：EXISTS list"></a>10.9 判断列表是否存在：EXISTS list</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476803379.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="10-10-lset-更新列表中指定下标的元素的value-前提是该下标必须有值，否则报错"><a href="#10-10-lset-更新列表中指定下标的元素的value-前提是该下标必须有值，否则报错" class="headerlink" title="10.10 lset:更新列表中指定下标的元素的value,前提是该下标必须有值，否则报错"></a>10.10 lset:更新列表中指定下标的元素的value,前提是该下标必须有值，否则报错</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476840575.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="10-11-在列表中插入值：前插和后插：linsert"><a href="#10-11-在列表中插入值：前插和后插：linsert" class="headerlink" title="10.11 在列表中插入值：前插和后插：linsert"></a>10.11 在列表中插入值：前插和后插：linsert</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632476896464.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h1 id="11-set详解"><a href="#11-set详解" class="headerlink" title="11. set详解"></a>11. set详解</h1><p>set是无序不重复集合，set命令都是s开头 <img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632643954408.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">命令           说明                        <br>-----------  ------------------------- <br>sadd         为集合添加元素                   <br>smembers     显示集合中所有元素 无序              <br>scard        返回集合中元素的个数                <br>spop         随机返回一个元素 并将元素在集合中删除       <br>smove        从一个集合中向另一个集合移动元素 必须是同一种类型 <br>srem         从集合中删除一个元素                <br>sismember    判断一个集合中是否含有这个元素           <br>srandmember  随机返回元素                    <br>sdiff        去掉第一个集合中其它集合含有的相同元素       <br>sinter       求交集                       <br>sunion       求和集                       <br></code></pre></td></tr></table></figure>
+
+<h2 id="11-1-添加：sadd"><a href="#11-1-添加：sadd" class="headerlink" title="11.1 添加：sadd"></a>11.1 添加：sadd</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477064797.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="11-2-查看所有-smembers"><a href="#11-2-查看所有-smembers" class="headerlink" title="11.2 查看所有: smembers"></a>11.2 查看所有: smembers</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477127825.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="11-3-查询set的元素个数：scard"><a href="#11-3-查询set的元素个数：scard" class="headerlink" title="11.3 查询set的元素个数：scard"></a>11.3 查询set的元素个数：scard</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477143763.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="11-4-判断set中是否存在某元素：sismember"><a href="#11-4-判断set中是否存在某元素：sismember" class="headerlink" title="11.4 判断set中是否存在某元素：sismember"></a>11.4 判断set中是否存在某元素：sismember</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477172245.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="11-5-移除某个元素：srem"><a href="#11-5-移除某个元素：srem" class="headerlink" title="11.5 移除某个元素：srem"></a>11.5 移除某个元素：srem</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477185068.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="11-6-随机抽取一个元素：SRANDMEMBER"><a href="#11-6-随机抽取一个元素：SRANDMEMBER" class="headerlink" title="11.6 随机抽取一个元素：SRANDMEMBER"></a>11.6 随机抽取一个元素：SRANDMEMBER</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477211405.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="11-7-随机移除一个元素：spop"><a href="#11-7-随机移除一个元素：spop" class="headerlink" title="11.7 随机移除一个元素：spop"></a>11.7 随机移除一个元素：spop</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477222068.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="11-8-将一个集合中的元素移动到另一个集合中：smove"><a href="#11-8-将一个集合中的元素移动到另一个集合中：smove" class="headerlink" title="11.8 将一个集合中的元素移动到另一个集合中：smove"></a>11.8 将一个集合中的元素移动到另一个集合中：smove</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477296157.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="11-9-集合之间求交并补集：sinter-sunite-sdiff"><a href="#11-9-集合之间求交并补集：sinter-sunite-sdiff" class="headerlink" title="11.9 集合之间求交并补集：sinter sunite sdiff"></a>11.9 集合之间求交并补集：sinter sunite sdiff</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477331468.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h3 id="差集sdiff"><a href="#差集sdiff" class="headerlink" title="差集sdiff"></a>差集sdiff</h3><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477435541.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h3 id="交集sinter"><a href="#交集sinter" class="headerlink" title="交集sinter"></a>交集sinter</h3><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477391019.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h3 id="并集sunion"><a href="#并集sunion" class="headerlink" title="并集sunion"></a>并集sunion</h3><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477447668.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h1 id="12-hash详解"><a href="#12-hash详解" class="headerlink" title="12. hash详解"></a>12. hash详解</h1><p>hash的形式：key filed vlaue,相当于java中的map集合 hash命令都是h开头</p>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632643989267.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">命令            说明              <br>------------  --------------- <br>hset          设置一个key/value对  <br>hget          获得一个key对应的value <br>hgetall       获得所有的key/value对 <br>hdel          删除某一个key/value对 <br>hexists       判断一个key是否存在     <br>hkeys         获得所有的key        <br>hvals         获得所有的value      <br>hmset         设置多个key/value   <br>hmget         获得多个key的value   <br>hsetnx        设置一个不存在的key的值   <br>hincrby       为value进行加法运算    <br>hincrbyfloat  为value加入浮点值     <br></code></pre></td></tr></table></figure>
+
+<h2 id="12-1-向hash中添加值：hset"><a href="#12-1-向hash中添加值：hset" class="headerlink" title="12.1 向hash中添加值：hset"></a>12.1 向hash中添加值：hset</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477692339.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="12-2-得到hash中的指定filed的值：hget"><a href="#12-2-得到hash中的指定filed的值：hget" class="headerlink" title="12.2 得到hash中的指定filed的值：hget"></a>12.2 得到hash中的指定filed的值：hget</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477703371.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="12-3-得到hash中的所有值-hgetall"><a href="#12-3-得到hash中的所有值-hgetall" class="headerlink" title="12.3 得到hash中的所有值:hgetall"></a>12.3 得到hash中的所有值:hgetall</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477745829.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="12-4-批量添加和获取：hmset-hmget"><a href="#12-4-批量添加和获取：hmset-hmget" class="headerlink" title="12.4 批量添加和获取：hmset hmget"></a>12.4 批量添加和获取：hmset hmget</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477816044.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="12-5-删除指定的字段：hdel"><a href="#12-5-删除指定的字段：hdel" class="headerlink" title="12.5 删除指定的字段：hdel"></a>12.5 删除指定的字段：hdel</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477844890.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="12-6-获取hash的字段长度：hlen"><a href="#12-6-获取hash的字段长度：hlen" class="headerlink" title="12.6 获取hash的字段长度：hlen"></a>12.6 获取hash的字段长度：hlen</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477866011.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="12-7-判断hash中的字段是否存在：hexist"><a href="#12-7-判断hash中的字段是否存在：hexist" class="headerlink" title="12.7 判断hash中的字段是否存在：hexist"></a>12.7 判断hash中的字段是否存在：hexist</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477881187.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="12-8-获取所有的key-字段-hkeys-获取所有的value：hvals"><a href="#12-8-获取所有的key-字段-hkeys-获取所有的value：hvals" class="headerlink" title="12.8 获取所有的key(字段)hkeys,获取所有的value：hvals"></a>12.8 获取所有的key(字段)hkeys,获取所有的value：hvals</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477896459.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="12-9-指定增量：hincrby"><a href="#12-9-指定增量：hincrby" class="headerlink" title="12.9 指定增量：hincrby"></a>12.9 指定增量：hincrby</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632477919981.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<p><strong>hash变更的数据 user name age,尤其是是用户信息之类的，经常变动的信息！ hash 更适合于对象的存储，String更加适合字符串存储！</strong></p>
+<h1 id="13-Zset详解"><a href="#13-Zset详解" class="headerlink" title="13. Zset详解"></a>13. Zset详解</h1><p>zset是有序不可重复的集合,zset命令都是z开头 <img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644102803.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">命令                      说明             <br>----------------------  -------------- <br>zadd                    添加一个有序集合元素     <br>zcard                   返回集合的元素个数      <br>zrange 升序 zrevrange 降序  返回一个范围内的元素     <br>zrangebyscore           按照分数查找一个范围内的元素 <br>zrank                   返回排名           <br>zrevrank                倒序排名           <br>zscore                  显示某一个元素的分数     <br>zrem                    移除某一个元素        <br>zincrby                 给某个特定元素加分      <br></code></pre></td></tr></table></figure>
+
+<h2 id="13-1-添加数据：zadd"><a href="#13-1-添加数据：zadd" class="headerlink" title="13.1 添加数据：zadd"></a>13.1 添加数据：zadd</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478034715.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="13-2-获取所有值-按照索引获取：zrange"><a href="#13-2-获取所有值-按照索引获取：zrange" class="headerlink" title="13.2 获取所有值,按照索引获取：zrange"></a>13.2 获取所有值,按照索引获取：zrange</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478071159.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="13-3-获取所有值，按照score获取：zrangebyscore"><a href="#13-3-获取所有值，按照score获取：zrangebyscore" class="headerlink" title="13.3 获取所有值，按照score获取：zrangebyscore"></a>13.3 获取所有值，按照score获取：zrangebyscore</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478107108.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="13-4-移除元素：zrem"><a href="#13-4-移除元素：zrem" class="headerlink" title="13.4 移除元素：zrem"></a>13.4 移除元素：zrem</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478230841.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="13-5-得到元素的个数-zcard"><a href="#13-5-得到元素的个数-zcard" class="headerlink" title="13.5 得到元素的个数:zcard"></a>13.5 得到元素的个数:zcard</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478172600.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="13-6-获取指定区间的成员数量：zcount"><a href="#13-6-获取指定区间的成员数量：zcount" class="headerlink" title="13.6 获取指定区间的成员数量：zcount"></a>13.6 获取指定区间的成员数量：zcount</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632478326343.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<p><strong>ZSET 官方 可排序SET sortSet</strong></p>
+<h1 id="14-geospatial"><a href="#14-geospatial" class="headerlink" title="14. geospatial"></a>14. geospatial</h1><h1 id="15-bitmaps"><a href="#15-bitmaps" class="headerlink" title="15. bitmaps"></a>15. bitmaps</h1><p><strong>bitmap即位存储，适用于只有两面性的内容。如：可以用bitmap存储用户是否登录，是否注册，是否打卡等等。bitmap的值只有0和1两个值。</strong></p>
+<h2 id="15-1-存储数据：setbit"><a href="#15-1-存储数据：setbit" class="headerlink" title="15.1 存储数据：setbit"></a>15.1 存储数据：setbit</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644429996.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="15-2-获取指定下标的值：getbit"><a href="#15-2-获取指定下标的值：getbit" class="headerlink" title="15.2 获取指定下标的值：getbit"></a>15.2 获取指定下标的值：getbit</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644452415.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="15-3-统计bitmap中1的位数：bitcount"><a href="#15-3-统计bitmap中1的位数：bitcount" class="headerlink" title="15.3 统计bitmap中1的位数：bitcount"></a>15.3 统计bitmap中1的位数：bitcount</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644484448.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h1 id="16-hyperloglogs"><a href="#16-hyperloglogs" class="headerlink" title="16. hyperloglogs"></a>16. hyperloglogs</h1><p><strong>用于统计基数（即不重复的数据）,可以用于统计网页访问量</strong></p>
+<h2 id="16-1-添加：pfadd"><a href="#16-1-添加：pfadd" class="headerlink" title="16.1 添加：pfadd"></a>16.1 添加：pfadd</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644672064.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="16-2-计数：pfcount"><a href="#16-2-计数：pfcount" class="headerlink" title="16.2 计数：pfcount"></a>16.2 计数：pfcount</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644689711.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="16-3-合并：pfmerge"><a href="#16-3-合并：pfmerge" class="headerlink" title="16.3 合并：pfmerge"></a>16.3 合并：pfmerge</h2><p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1632644719576.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Redis/" class="category-chain-item">Redis</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>rediss-数据类型</div>
+      <div>http://example.com/2021/09/24/redisleixing/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>jujimeizuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年9月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/26/redisshiwu/" title="redis-事务">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">redis-事务</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/15/dockerimp/" title="Docker精髓（容器数据卷、Dockerfile、Docker网络）">
+                        <span class="hidden-mobile">Docker精髓（容器数据卷、Dockerfile、Docker网络）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,889 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crab.jpg">
+  <link rel="icon" href="/img/crab.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="jujimeizuo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Docker常用命令帮助命令 docker version # 显示Docker版本信息 docker info # 显示Docker系统信息，包括镜像数、容器数、正在运行的镜像数、暂停的镜像数、停止的镜像数等 docker –help # 显示docker指令的信息 docker 指令 –help # 显示具体某一个docker指令的可选项docker 指令 –help # 显示具体某一个doc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker常用命令">
+<meta property="og:url" content="http://example.com/2021/09/14/dockerml/index.html">
+<meta property="og:site_name" content="jujimeizuoの博客">
+<meta property="og:description" content="Docker常用命令帮助命令 docker version # 显示Docker版本信息 docker info # 显示Docker系统信息，包括镜像数、容器数、正在运行的镜像数、暂停的镜像数、停止的镜像数等 docker –help # 显示docker指令的信息 docker 指令 –help # 显示具体某一个docker指令的可选项docker 指令 –help # 显示具体某一个doc">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631619962208.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620096012.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620195894.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620344810.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620452939.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620406980.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620581235.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620595815.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620876616.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620901664.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631621011902.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631621090534.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631621146517.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631621187935.png">
+<meta property="og:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631621235356.png">
+<meta property="article:published_time" content="2021-09-14T11:44:14.000Z">
+<meta property="article:modified_time" content="2023-07-23T09:31:35.842Z">
+<meta property="article:author" content="jujimeizuo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631619962208.png">
+  
+  
+  
+  <title>Docker常用命令 - jujimeizuoの博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"e65Vq77rqmkDQc43KkFYR8ZF-gzGzoHsz","app_key":"1cs4DEmISk68uBVHcT5hi89N","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>jujimeizuo</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/banner.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Docker常用命令"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-09-14 19:44" pubdate>
+          2021年9月14日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Docker常用命令</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h1><h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><ol>
+<li>docker version # 显示Docker版本信息</li>
+<li>docker info # 显示Docker系统信息，包括镜像数、容器数、正在运行的镜像数、暂停的镜像数、停止的镜像数等</li>
+<li>docker –help # 显示docker指令的信息</li>
+<li>docker 指令 –help # 显示具体某一个docker指令的可选项docker 指令 –help # 显示具体某一个docker指令的可选项</li>
+</ol>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631619962208.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h2 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h2><h3 id="docker-images"><a href="#docker-images" class="headerlink" title="docker images"></a>docker images</h3><ol>
+<li>docker images # 显示你本地主机上（买的服务器或安装的Linux虚拟机）所有下载的镜像信息</li>
+</ol>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620096012.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<p>执行该指令之后，信息显示如上图所示，对每个标签的解释如下：</p>
+<ol>
+<li>REPOSITORY # 镜像的仓库源（也就是镜像名）</li>
+<li>TAG # 镜像的标签（也就是镜像的版本，如果不指定，则默认为lastest，也就是最新版）</li>
+<li>IMAGE ID # 镜像的ID（同一个镜像的不同版本，拥有不同的镜像ID）</li>
+<li>CREATED # 镜像的创建时间</li>
+<li>SIZE # 镜像的大小</li>
+</ol>
+<p>通过<strong>docker images –help</strong>可以看到该指令的一些可选项，现对几个常用的可选项做一解释：</p>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620195894.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<ol>
+<li>-a # 列出本地所有镜像</li>
+<li>-q # 只列出镜像的ID</li>
+<li>--digests # 显示镜像的摘要信息</li>
+</ol>
+<h3 id="docker-search"><a href="#docker-search" class="headerlink" title="docker search"></a>docker search</h3><ol>
+<li>docker search 某个镜像的名称 # 搜索镜像，例如：docker search mysql</li>
+</ol>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620344810.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<ol>
+<li>NAME # 镜像名</li>
+<li>DESCRIPTION # 镜像描述</li>
+<li>STARS # 收藏数（类似于GitHub上的STARS，STARS越多，表示越受欢迎，下载次数越多）</li>
+</ol>
+<p>如果我们只想搜索STARS不小于5000的镜像呢？我们可以采用一些过滤条件。</p>
+<p>通过<strong>docker search –help</strong>指令来查看一些可选参数。从图中可以看出，我们可以采用<strong>-f或–filter filter</strong>指令来进行过滤。</p>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620452939.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<ol>
+<li>以下四种方式均可</li>
+<li>docker search –filter&#x3D;stars&#x3D;5000 mysql</li>
+<li>docker search –filter stars&#x3D;5000 mysql</li>
+<li>docker search -f&#x3D;stars&#x3D;5000 mysql</li>
+<li>docker search -f stars&#x3D;5000 mysql</li>
+</ol>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620406980.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h3 id="docker-pull"><a href="#docker-pull" class="headerlink" title="docker pull"></a>docker pull</h3><ol>
+<li>docker pull mysql # 下载镜像（这里如果不指定TAG，默认就是lastest最新版）</li>
+</ol>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620581235.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<ol>
+<li>docker pull mysql:5.7 需要注意的是，这个镜像的版本一定得是DockerHub上有的版本。不然会下载</li>
+</ol>
+<h3 id="docker-rmi"><a href="#docker-rmi" class="headerlink" title="docker rmi"></a>docker rmi</h3><p>首先使用<strong>docker rmi –help</strong>来看一下这个命令都有哪些可选项。如下图所示：</p>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620595815.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<p>可以看到有<strong>-f</strong>参数</p>
+<ol>
+<li>删除镜像</li>
+<li>docker rmi -f 镜像id # 删除单个镜像</li>
+<li>docker rmi -f 镜像名:tag 镜像名:tag # 删除多个</li>
+<li>docker rmi -f $(docker images -qa) # 删除全部</li>
+</ol>
+<h2 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h2><p>有镜像才能创建容器，我们这里使用centos的镜像来测试，就是虚拟一个centos</p>
+<h3 id="新建容器并启动（docker-run）"><a href="#新建容器并启动（docker-run）" class="headerlink" title="新建容器并启动（docker run）"></a>新建容器并启动（docker run）</h3><p><strong>docker run</strong>命令就是<strong>docker create</strong>和<strong>docker start</strong>命令的组合</p>
+<ol>
+<li><p>docker run [OPTIONS] 镜像名 [COMMAND][ARGS…]</p>
+</li>
+<li><h1 id="常用可选参数以及解释"><a href="#常用可选参数以及解释" class="headerlink" title="常用可选参数以及解释"></a>常用可选参数以及解释</h1></li>
+<li><p>--name # 给容器取一个名字</p>
+</li>
+<li><p>--rm # 容器退出后，自动删除容器</p>
+</li>
+<li><p>-i # 以交互模式运行容器，通常与-t同时使用，即-it</p>
+</li>
+<li><p>-t # 分配一个虚拟的终端，在docker中启动bash就会有提示符，通常与-i通知使用，即-it</p>
+</li>
+<li><p>-d # 在后台运行容器。等同于进入容器后按Ctrl+P+Q。所以可以docker attach回去。在后台运行的容器，只能通过网络和它交互。</p>
+</li>
+<li><p>-p # 设置端口转发。-p:hostport:containerport</p>
+</li>
+</ol>
+<p>测试如下：</p>
+<p>使用centos进行交互模式启动容器，在容器内执行&#x2F;bin&#x2F;bash命令 <img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620876616.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<p>由上图可以看出，地址已经变成容器内部了。</p>
+<h3 id="列出所有运行的容器（docker-ps）"><a href="#列出所有运行的容器（docker-ps）" class="headerlink" title="列出所有运行的容器（docker ps）"></a>列出所有运行的容器（docker ps）</h3><ol>
+<li>docker ps [OPTIONS]</li>
+</ol>
+<p>我们首先使用<strong>docker ps –help</strong>指令来看一下都有哪些可选参数：</p>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631620901664.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<ol>
+<li>-a # 列出所有正在运行的容器 + 历史运行过的容器</li>
+<li>-l # 列出最近创建的一个容器以及该容器的信息</li>
+<li>-n int # 列出最近n个创建的容器以及容器的信息</li>
+<li>-q # 列出容器的编号</li>
+<li>-s # 列出容器的大小</li>
+</ol>
+<h3 id="容器退出（exit、Ctrl-P-Q）"><a href="#容器退出（exit、Ctrl-P-Q）" class="headerlink" title="容器退出（exit、Ctrl+P+Q）"></a>容器退出（exit、Ctrl+P+Q）</h3><ol>
+<li>exit # 容器停止并退出</li>
+<li>Ctrl + P + Q # 容器不停止退出，也就是进入后台模式，等同于docker run的参数 -d</li>
+</ol>
+<h3 id="删除容器（docker-rm）"><a href="#删除容器（docker-rm）" class="headerlink" title="删除容器（docker rm）"></a>删除容器（docker rm）</h3><ol>
+<li>docker rm 容器id # 删除指定容器</li>
+<li>docker rm -f $(docker ps -aq) # 删除所有容器（常用）</li>
+<li>docker ps -aq xargs docker -rm # 删除所有容器（不常用）</li>
+</ol>
+<h2 id="常用其他命令"><a href="#常用其他命令" class="headerlink" title="常用其他命令"></a>常用其他命令</h2><h3 id="后台启动容器-d"><a href="#后台启动容器-d" class="headerlink" title="后台启动容器 (-d)"></a>后台启动容器 (-d)</h3><ol>
+<li>docker run -d 容器名 # 后台启动容器</li>
+<li>问题: 使用docker ps 查看，发现容器已经退出了！</li>
+<li>解释：Docker容器后台运行，就必须有一个前台进程，容器运行的命令如果不是那些一直挂起的命令，就会自动退出。</li>
+<li>比如，你运行了nginx服务，但是docker前台没有运行应用，这种情况下，容器启动后，会立即自杀，因为他觉得没有程序了，所以最好的情况是，将你的应用使用前台进程的方式运行启动。</li>
+</ol>
+<h3 id="查看日志（docker-logs）"><a href="#查看日志（docker-logs）" class="headerlink" title="查看日志（docker logs）"></a>查看日志（docker logs）</h3><ol>
+<li>docker logs 容器id</li>
+</ol>
+<p><strong>docker logs</strong>有以下可选参数：</p>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631621011902.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<ol>
+<li>-t # 显示时间戳</li>
+<li>-f # 打印最新的日志</li>
+<li>--tail 数字 # 数字—显示多少条</li>
+</ol>
+<h3 id="查看容器中运行的进程信息（docker-top）"><a href="#查看容器中运行的进程信息（docker-top）" class="headerlink" title="查看容器中运行的进程信息（docker top）"></a>查看容器中运行的进程信息（docker top）</h3><ol>
+<li>docker top 容器id</li>
+</ol>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631621090534.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h3 id="查看容器-镜像的元数据（docker-inspect）"><a href="#查看容器-镜像的元数据（docker-inspect）" class="headerlink" title="查看容器 &#x2F; 镜像的元数据（docker inspect）"></a>查看容器 &#x2F; 镜像的元数据（docker inspect）</h3><ol>
+<li>docker inspect 容器id</li>
+</ol>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631621146517.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<h3 id="进入正在运行的容器"><a href="#进入正在运行的容器" class="headerlink" title="进入正在运行的容器"></a>进入正在运行的容器</h3><h4 id="docker-exec"><a href="#docker-exec" class="headerlink" title="docker exec"></a>docker exec</h4><p>这个命令是用已经运行的容器执行命令。需要注意的是，如果容器关闭后再次运行，那么用exec命令执行的命令是不会自己再次执行的</p>
+<ol>
+<li>docker exec 容器id</li>
+</ol>
+<p><img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631621187935.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<ol>
+<li>-d # 让命令在后台执行</li>
+<li>-e # 设置环境变量</li>
+<li>-it # 使用交互模式进入</li>
+<li>-u -w # 分别设置命令运行的用户和work directory。也就是如果要改变用户或者工作目录，就是用-u或-w</li>
+</ol>
+<h4 id="docker-attach"><a href="#docker-attach" class="headerlink" title="docker attach"></a>docker attach</h4><p>attach命令把一个后台运行的容器搞到前台来，这样就可以看到他们的输出，并且使用输入了。</p>
+<ol>
+<li>docker attach 容器id</li>
+</ol>
+<p>attach命令的可选参数如下： <img src="http://121.196.156.71/blog/wordpress/wp-content/uploads/2021/09/image-1631621235356.png" srcset="/img/loading.gif" lazyload alt="file"></p>
+<ol>
+<li>--no-stdin # 关闭输入</li>
+<li>--sig-proxy # 信号转发，默认开启，这样DMD进程就可以收到你的信号了</li>
+</ol>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p><strong>exec</strong>是在容器中打开新的终端，并且可以启动新的进程</p>
+<p><strong>attach</strong>是直接进入容器启动命令的终端，不会启动新的进程</p>
+<h3 id="从容器内拷贝文件到主机上（docker-cp）"><a href="#从容器内拷贝文件到主机上（docker-cp）" class="headerlink" title="从容器内拷贝文件到主机上（docker cp）"></a>从容器内拷贝文件到主机上（docker cp）</h3><ol>
+<li><p>docker cp 容器id:容器内路径 目的主机路径</p>
+</li>
+<li><p>例如：</p>
+</li>
+<li><p>docker cp f261f17bb39d:&#x2F;home&#x2F;f1 &#x2F;home</p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Docker/" class="category-chain-item">Docker</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Docker常用命令</div>
+      <div>http://example.com/2021/09/14/dockerml/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>jujimeizuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年9月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/15/dockerimp/" title="Docker精髓（容器数据卷、Dockerfile、Docker网络）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker精髓（容器数据卷、Dockerfile、Docker网络）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/13/maven/" title="maven常用依赖">
+                        <span class="hidden-mobile">maven常用依赖</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span id="runtime_span"></span> <script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new Date("3/19/2021 00:00:00");Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);runtime_span.innerHTML="小站已运行"+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
